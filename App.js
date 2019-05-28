@@ -8,7 +8,11 @@ export default class App extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			latlong: {
+			regionlatlong: {
+				latitude: 40.7127,
+				longitude: -74.0059,
+			},
+			userlatlong: {
 				latitude: 40.7127,
 				longitude: -74.0059,
 			},
@@ -46,18 +50,13 @@ export default class App extends React.Component {
 				minZoomLevel = { 14.5 }
 				maxZoomLevel = { 20 }
 				region={{
-				latitude: this.state.latlong.latitude,
-				longitude: this.state.latlong.longitude,
+				latitude: this.state.regionlatlong.latitude,
+				longitude: this.state.regionlatlong.longitude,
 				latitudeDelta: 0.0922,
           			longitudeDelta: 0.0421,
 				}}
+				showsUserLocation = {true}
 			>
-			<MapView.Marker
-				coordinate={{latitude: this.state.latlong.latitude,
-					longitude: this.state.latlong.longitude,}}
-				title={"YOU"}
-				description={"HERE"}	
-			/>
 			{
 				this.state.markers.map((e, i)=>{
 					return <MapView.Marker
@@ -75,7 +74,7 @@ export default class App extends React.Component {
 			>
 				<Button
 					color='orange'
-					onPress={this.getLatLong}
+					onPress={this.getRegionLatLong}
 					title="Locate Me"
 					style={styles.button}
 				/>
@@ -84,13 +83,23 @@ export default class App extends React.Component {
   	}
 	
 	componentDidMount(){
-		this.getLatLong()
+		this.getRegionLatLong()
+		this.getUserLatLong()
 	}
 
-	getLatLong = () => {
+	getUserLatLong = () => {
 		navigator.geolocation.getCurrentPosition(location=>{
 				const {latitude, longitude} = location.coords
-				this.setState({latlong: {latitude, longitude}})
+				this.setState({userlatlong: {latitude, longitude}})
+			}
+		
+		)
+	}	
+
+	getRegionLatLong = () => {
+		navigator.geolocation.getCurrentPosition(location=>{
+				const {latitude, longitude} = location.coords
+				this.setState({regionlatlong: {latitude, longitude}})
 			}
 		)
 	}
@@ -111,15 +120,7 @@ const generatedMapStyle = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#1d2c4d"
-      }
-    ]
-  },
-  {
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
+        "color": "#242f3e"
       }
     ]
   },
@@ -127,7 +128,7 @@ const generatedMapStyle = [
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#8ec3b9"
+        "color": "#746855"
       }
     ]
   },
@@ -135,77 +136,16 @@ const generatedMapStyle = [
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#1a3646"
+        "color": "#242f3e"
       }
     ]
   },
   {
-    "featureType": "administrative.country",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#4b6878"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.land_parcel",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.land_parcel",
+    "featureType": "administrative.locality",
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#64779e"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.neighborhood",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "administrative.province",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#4b6878"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape.man_made",
-    "elementType": "geometry.stroke",
-    "stylers": [
-      {
-        "color": "#334e87"
-      }
-    ]
-  },
-  {
-    "featureType": "landscape.natural",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#023e58"
-      }
-    ]
-  },
-  {
-    "featureType": "poi",
-    "elementType": "geometry",
-    "stylers": [
-      {
-        "color": "#283d6a"
+        "color": "#d59563"
       }
     ]
   },
@@ -214,25 +154,33 @@ const generatedMapStyle = [
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#6f9ba5"
+        "color": "#d59563"
       }
     ]
   },
   {
-    "featureType": "poi",
-    "elementType": "labels.text.stroke",
+    "featureType": "poi.business",
     "stylers": [
       {
-        "color": "#1d2c4d"
+        "visibility": "off"
       }
     ]
   },
   {
     "featureType": "poi.park",
-    "elementType": "geometry.fill",
+    "elementType": "geometry",
     "stylers": [
       {
-        "color": "#023e58"
+        "color": "#263c3f"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
@@ -241,7 +189,7 @@ const generatedMapStyle = [
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#3C7680"
+        "color": "#6b9a76"
       }
     ]
   },
@@ -250,7 +198,16 @@ const generatedMapStyle = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#304a7d"
+        "color": "#38414e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#212a37"
       }
     ]
   },
@@ -259,25 +216,7 @@ const generatedMapStyle = [
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#98a5be"
-      }
-    ]
-  },
-  {
-    "featureType": "road",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#1d2c4d"
-      }
-    ]
-  },
-  {
-    "featureType": "road.arterial",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
+        "color": "#9ca5b3"
       }
     ]
   },
@@ -286,7 +225,7 @@ const generatedMapStyle = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#2c6675"
+        "color": "#746855"
       }
     ]
   },
@@ -295,16 +234,7 @@ const generatedMapStyle = [
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#255763"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
+        "color": "#1f2835"
       }
     ]
   },
@@ -313,60 +243,25 @@ const generatedMapStyle = [
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#b0d5ce"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#023e58"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
-    "stylers": [
-      {
-        "visibility": "off"
+        "color": "#f3d19c"
       }
     ]
   },
   {
     "featureType": "transit",
-    "elementType": "labels.text.fill",
+    "elementType": "geometry",
     "stylers": [
       {
-        "color": "#98a5be"
-      }
-    ]
-  },
-  {
-    "featureType": "transit",
-    "elementType": "labels.text.stroke",
-    "stylers": [
-      {
-        "color": "#1d2c4d"
-      }
-    ]
-  },
-  {
-    "featureType": "transit.line",
-    "elementType": "geometry.fill",
-    "stylers": [
-      {
-        "color": "#283d6a"
+        "color": "#2f3948"
       }
     ]
   },
   {
     "featureType": "transit.station",
-    "elementType": "geometry",
+    "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#3a4762"
+        "color": "#d59563"
       }
     ]
   },
@@ -375,7 +270,7 @@ const generatedMapStyle = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#0e1626"
+        "color": "#17263c"
       }
     ]
   },
@@ -384,7 +279,16 @@ const generatedMapStyle = [
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#4e6d70"
+        "color": "#515c6d"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#17263c"
       }
     ]
   }
