@@ -1,1 +1,9 @@
-{}
+{
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://q3-iap.anonymous.horizons-frontend.exp.direct",
+  "packagerNgrokUrl": "https://packager.q3-iap.anonymous.horizons-frontend.exp.direct",
+  "ngrokPid": 13314,
+  "devToolsPort": 19002,
+  "packagerPort": 19004,
+  "packagerPid": 13298
+}
