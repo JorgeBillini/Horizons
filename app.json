@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mapTest",
-    "slug": "mapTest",
+    "name": "Horizons_FrontEnd",
+    "slug": "Horizons_FrontEnd",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
