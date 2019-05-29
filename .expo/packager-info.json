@@ -1,0 +1,9 @@
+{
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://ea-bzy.anonymous.horizons-frontend.exp.direct",
+  "packagerNgrokUrl": "https://packager.ea-bzy.anonymous.horizons-frontend.exp.direct",
+  "ngrokPid": 13226,
+  "devToolsPort": 19002,
+  "packagerPort": 19003,
+  "packagerPid": 13205
+}
