@@ -75,7 +75,7 @@ export default class Map extends React.Component {
 			>
 				<Button
 					color='orange'
-					onPress={this.getRegionLatLong}
+					onPress={()=>{this.props.navigation.navigate('Home')}}
 					title="Locate Me"
 					style={styles.button}
 				/>
