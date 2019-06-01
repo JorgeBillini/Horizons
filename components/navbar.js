@@ -27,6 +27,8 @@ export default class NavBar extends React.Component{
         <Button  title=""
             icon={<Ionicons name="ios-list" size={32} color="white" />}
             onPress={()=> {this.props.navigate('eventList')}}
+        <Button title="Profile"
+            onPress={()=> {this.props.navigation.navigate('Profile')}}
         />
         </View>
        <View style={styles.button}>
