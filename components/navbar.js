@@ -12,6 +12,12 @@ export default class NavBar extends React.Component{
         <Button title="map"
             onPress={()=> {this.props.navigation.navigate('Map')}}
         />
+        <Button title="Profile"
+            onPress={()=> {this.props.navigation.navigate('Profile')}}
+        />
+        <Button title="event list"
+            onPress={()=> {this.props.navigation.navigate('eventList')}}
+        />
         </>)
         
     }
