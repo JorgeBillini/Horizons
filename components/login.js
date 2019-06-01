@@ -14,7 +14,7 @@ export default class Login extends Component {
                         placeholder='email'
                         placeholderTextColor='rgba(255,255,255,0.7)'
                         style={styles.input}
-                        returnKeyType='Next'
+                        returnKeyType='next'
                         onSubmitEditing={ () => this.pwInput.focus() }
                         keyboardType='email-address'
                         autoCapitalize='none'
@@ -25,7 +25,7 @@ export default class Login extends Component {
                         secureTextEntry
                         placeholderTextColor='rgba(255,255,255,0.7)'
                         style={styles.input}
-                        returnKeyType='Go'
+                        returnKeyType='go'
                         ref={input => this.pwInput = input}
                         />
 
