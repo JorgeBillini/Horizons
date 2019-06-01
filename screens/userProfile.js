@@ -1,11 +1,18 @@
 import React from 'react';
 import {Text} from 'react-native';
+import NavBar from '../components/navbar'
 
 export default class UserProfile extends React.Component{
     static navigationOptions= {
         header:null
       }
+
     render(){
-        return (<Text>User</Text>)
+        let {navigate} = this.props.navigation;
+        return (
+            <>
+        <Text>User</Text>
+        </>
+        )
     }
 }

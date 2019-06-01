@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { MapView } from 'expo'
+import NavBar from '../components/navbar'
+import UserProfile from '../screens/userProfile'
 
 export default class Map extends React.Component {
 	static navigationOptions= {
@@ -40,9 +42,9 @@ export default class Map extends React.Component {
 				},
 			]
 		}
-	}
-
-  	render() {
+  }
+    	render() {
+        let {navigate} = this.props.navigation;
     		return <>
 			<MapView
 				style={{ flex: 1 }}
@@ -70,16 +72,6 @@ export default class Map extends React.Component {
 				})
 			}
 			</MapView>
-			<View 
-				style={styles.button}
-			>
-				<Button
-					color='orange'
-					onPress={()=>{this.props.navigation.navigate('Home')}}
-					title="Locate Me"
-					style={styles.button}
-				/>
-			</View>
     		</>
   	}
 	

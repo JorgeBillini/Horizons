@@ -1,32 +1,58 @@
 import React from 'react';
-
-import {StyleSheet,Button, Text, View} from 'react-native';
-
-
+import { Ionicons } from '@expo/vector-icons';
+import {Button, ThemeProvider} from 'react-native-elements';
+import {StyleSheet, Text, View,TouchableHighlight} from 'react-native';
 export default class NavBar extends React.Component{
     static navigationOptions= {
         header:null
       }
+      
     render(){
+        const Theme = {
+            colors:{
+                primary:'black'
+            }
+        }
         return(<>
+        <ThemeProvider theme={Theme}>
         <View style={styles.container}>
-        <Button title="map"
-            onPress={()=> {this.props.navigation.navigate('Map')}}
+
+        <View style={styles.button}>
+        < Button   title=""
+            onPress={()=> {this.props.navigate('Home')}}
+            icon={<Ionicons name="ios-map" size={32} color="white" />}
         />
-        <Button title="Profile"
-            onPress={()=> {this.props.navigation.navigate('Profile')}}
-        />
-        <Button title="event list"
-            onPress={()=> {this.props.navigation.navigate('eventList')}}
-        />
-        
         </View>
+        <View style={styles.button}>
+        <Button  title=""
+            icon={<Ionicons name="ios-list" size={32} color="white" />}
+            onPress={()=> {this.props.navigate('eventList')}}
+        />
+        </View>
+       <View style={styles.button}>
+       <Button title=""
+            icon={<Ionicons name="ios-person" size={32} color="white" />}
+            onPress={()=> {this.props.navigate('Profile')}}
+        />
+       </View>
+        </View>
+        </ThemeProvider>
         </>)
         
     }
 }
 const styles = StyleSheet.create({
      container:{
-        marginTop: 100
+        marginTop: 100,
+        flex:1,
+        flexDirection:'row',
+        position:'absolute',
+        bottom:0
+     },
+     button:{
+        flexDirection:'column',
+        flex:1,
+        backgroundColor:'black'
+        
      }
 })
