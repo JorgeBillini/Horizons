@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+// import { Button } from 'react-native-elements';
 
 export default class Login extends Component {
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <View>
-                    <Text style={styles.title}>Log In</Text>
-                </View>
 
                 <View style={styles.formContainer}>
                     <TextInput
@@ -35,6 +33,16 @@ export default class Login extends Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
+
+                <View style={styles.signUpContainer}>
+                    <Text style={styles.text}>New?</Text>
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <Text style={styles.buttonText}>
+                            SIGN UP
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+
             </KeyboardAvoidingView>
         )
     }
@@ -46,9 +54,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightblue',
         justifyContent: 'center'
     },
-    title: {
-        textAlign: 'center',
-    },
     formContainer: {
         padding: 20
     },
@@ -59,12 +64,19 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     buttonContainer: {
-        backgroundColor: '#2980B9',
+        backgroundColor: '#3582DB',
         paddingVertical: 15,
     },
     buttonText: {
         color: 'white',
         textAlign: 'center',
-        fontWeight: '700'
+        fontWeight: '700',
+    },
+    signUpContainer: {
+        padding: 20
+    },
+    text: {
+        textAlign: 'center',
+        paddingVertical: 15,
     }
 });
