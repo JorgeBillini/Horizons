@@ -12,13 +12,13 @@ const RootStack = createStackNavigator({
     },
     Profile: {
       screen:UserProfile
-	},
-	eventList: {
-		screen:eventList
-	},
-	Map:{
-		screen:Map
-	}
+    },
+    eventList: {
+      screen:eventList
+    },
+    Map:{
+      screen:Map
+    }
 	
   });
 
