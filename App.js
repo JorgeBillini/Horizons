@@ -7,7 +7,7 @@ import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 
 const RootStack = createStackNavigator({
-    Home: {
+    Home:{
       screen: NavBar
     },
     Profile: {
@@ -19,8 +19,7 @@ const RootStack = createStackNavigator({
     Map:{
       screen:Map
     }
-	
-  });
+});
 
 const App = createAppContainer(RootStack);
 export default App

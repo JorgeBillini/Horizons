@@ -13,6 +13,7 @@ export default class NavBar extends React.Component{
         <Button title="map"
             onPress={()=> {this.props.navigation.navigate('Map')}}
         />
+<<<<<<< Updated upstream
         <Button title="Profile"
             onPress={()=> {this.props.navigation.navigate('Profile')}}
         />
@@ -21,6 +22,11 @@ export default class NavBar extends React.Component{
         />
         
         </View>
+=======
+        <Button title="profile"
+            onPress={()=> {this.props.navigation.navigate('Profile')}}
+        />
+>>>>>>> Stashed changes
         </>)
         
     }
