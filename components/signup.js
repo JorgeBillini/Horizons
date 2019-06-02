@@ -5,6 +5,7 @@ import firebase from '../firebase';
 
 export default class SignUp extends Component {
     state = {
+        username: '',
         email: '',
         password: '',
         interests: [],
@@ -13,7 +14,7 @@ export default class SignUp extends Component {
 
     onPressSignUp = () =>{
         console.log('pressed sign up! => firebase => db => profile')
-        const {email, password} = this.state;
+        const {username, email, password} = this.state;
 
         // sign up with firebase
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -37,10 +38,24 @@ export default class SignUp extends Component {
                 {/* sign up form */}
                 <View style={styles.formContainer}>
                     <TextInput
+                        placeholder='username'
+                        placeholderTextColor='rgba(255,255,255,0.7)'
+                        style={styles.input}
+                        returnKeyType='next'
+                        onSubmitEditing={ () => this.email.focus() }
+                        keyboardType='default'
+                        autoCapitalize='none'
+                        autoCorrect={false}
+                        onChangeText={(username) => this.setState({username})}
+                        value={this.state.username}
+                        />
+
+                    <TextInput
                         placeholder='email'
                         placeholderTextColor='rgba(255,255,255,0.7)'
                         style={styles.input}
                         returnKeyType='next'
+                        ref={input => this.email = input}
                         onSubmitEditing={ () => this.pwInput.focus() }
                         keyboardType='email-address'
                         autoCapitalize='none'
@@ -48,6 +63,7 @@ export default class SignUp extends Component {
                         onChangeText={(email) => this.setState({email})}
                         value={this.state.email}
                         />
+
                     <TextInput
                         placeholder='password'
                         secureTextEntry
@@ -101,7 +117,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'lightblue',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingTop: 20
     },
     formContainer: {
         padding: 20
