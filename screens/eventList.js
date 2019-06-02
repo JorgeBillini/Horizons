@@ -1,6 +1,5 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
-import NavBar from '../components/navbar'
 
 
 export default class eventList extends React.Component {

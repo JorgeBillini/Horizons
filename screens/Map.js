@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { MapView } from 'expo'
-import NavBar from '../components/navbar'
-import UserProfile from '../screens/userProfile'
 
 export default class Map extends React.Component {
 	static navigationOptions= {
