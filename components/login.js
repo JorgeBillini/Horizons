@@ -1,16 +1,29 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import {ToggleAuthViewContext} from '../contexts/auth';
+import firebase from '../firebase';
 
 export default class Login extends Component {
     state = {
         email: '',
         password: '',
+        error: '',
     }
     
     onPressLogin = () =>{
         console.log('pressed login! verify thru firebase => db call => user profile')
-        // connect to firebase
+        const {email, password} = this.state;
+
+        // sign in & authenticate via firebase
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(res =>{
+            console.log('login response: ', res);
+            
+        })
+        .catch(e =>{
+            this.setState({error: e.message+'.'});
+        })
+        
         // get from db
         // show user profile
     }

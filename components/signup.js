@@ -1,17 +1,29 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import {ToggleAuthViewContext} from '../contexts/auth';
+import firebase from '../firebase';
 
 export default class SignUp extends Component {
     state = {
         email: '',
         password: '',
         interests: [],
+        error: '',
     }
 
     onPressSignUp = () =>{
         console.log('pressed sign up! => firebase => db => profile')
-        // signup with firebase
+        const {email, password} = this.state;
+
+        // sign up with firebase
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(res =>{
+            console.log(res);
+        })
+        .catch(e => {
+            this.setState({error: e.message+'.'});
+        });
+        
         // post user to db
         // go to user profile page
     }
