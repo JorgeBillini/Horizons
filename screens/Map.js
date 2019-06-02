@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 import { MapView } from 'expo'
+import axios from 'axios'
 
 export default class Map extends React.Component {
-	static navigationOptions= {
-    header:null
-  }
+	static navigationOptions= {header:null}
+
 	constructor(props){
 		super(props)
 		this.state = {
@@ -17,28 +17,12 @@ export default class Map extends React.Component {
 				latitude: 40.7127,
 				longitude: -74.0059,
 			},
-			markers: [
-				{
-					latitude: 40.7127,
-					longitude: -74.0059,
-				},
-				{
-					latitude: 40.7127,
-					longitude: -74.0059,
-				},
-				{
-					latitude: 40.7127,
-					longitude: -74.0059,
-				},
-				{
-					latitude: 40.7127,
-					longitude: -74.0059,
-				},
-				{
-					latitude: 40.7127,
-					longitude: -74.0059,
-				},
-			]
+			events: [.00725, 2],
+			places: [{
+					business_name: '',
+					lat: 40.7127,
+					long: -74.0059
+				}]
 		}
   }
     	render() {
@@ -57,15 +41,20 @@ export default class Map extends React.Component {
           			longitudeDelta: 0.0421,
 				}}
 				showsUserLocation = {true}
+				showsMyLocationButton = {true}
+				onUserLocationChange = {() => {
+					this.getUserLatLong()
+					this.getPlaces()
+				}}
 			>
 			{
-				this.state.markers.map((e, i)=>{
+				this.state.places.map((e, i)=>{
 					return <MapView.Marker
 						key={i}
-						coordinate={{latitude: e.latitude,
-							longitude: (e.longitude - Math.random()),}}
-						title={"EVENT"}
-						description={`${e.latitude}, ${e.longitude}`}
+						coordinate={{latitude: parseFloat(e.lat),
+							longitude: parseFloat(e.long)}}
+						title={e.business_name}
+						description={`Restaurant`}
 					/>
 				})
 			}
@@ -76,6 +65,24 @@ export default class Map extends React.Component {
 	componentDidMount(){
 		this.getRegionLatLong()
 		this.getUserLatLong()
+		this.getPlaces()
+	}
+
+	getPlaces = () => {
+		const {latitude, longitude} = this.state.userlatlong
+		axios.get(`http://horizons-api.herokuapp.com/places/?lat=${latitude}&long=${longitude}`)
+		.then(data=>{
+			const {msg} = data.data
+			this.setState({places: msg})
+		})
+	}
+
+	con = () => {
+		console.log(JSON.stringify(this.state.places))
+	}
+		
+	onUserLocaChange = () => {
+		
 	}
 
 	getUserLatLong = () => {
@@ -106,7 +113,8 @@ const styles = StyleSheet.create({
   	},
 });
 
-const generatedMapStyle = [
+const generatedMapStyle =
+[
   {
     "elementType": "geometry",
     "stylers": [
@@ -132,11 +140,44 @@ const generatedMapStyle = [
     ]
   },
   {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
     "featureType": "administrative.locality",
     "elementType": "labels.text.fill",
     "stylers": [
       {
         "color": "#d59563"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
@@ -150,10 +191,42 @@ const generatedMapStyle = [
     ]
   },
   {
+    "featureType": "poi.attraction",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
     "featureType": "poi.business",
     "stylers": [
       {
         "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.government",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.medical",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "stylers": [
+      {
+        "visibility": "on"
       }
     ]
   },
@@ -168,10 +241,19 @@ const generatedMapStyle = [
   },
   {
     "featureType": "poi.park",
-    "elementType": "labels.text",
+    "elementType": "labels.icon",
     "stylers": [
       {
         "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "on"
       }
     ]
   },
@@ -181,6 +263,39 @@ const generatedMapStyle = [
     "stylers": [
       {
         "color": "#6b9a76"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.place_of_worship",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.sports_complex",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
@@ -199,6 +314,15 @@ const generatedMapStyle = [
     "stylers": [
       {
         "color": "#212a37"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
       }
     ]
   },
@@ -240,10 +364,26 @@ const generatedMapStyle = [
   },
   {
     "featureType": "transit",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
     "elementType": "geometry",
     "stylers": [
       {
         "color": "#2f3948"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "stylers": [
+      {
+        "visibility": "on"
       }
     ]
   },
@@ -253,6 +393,30 @@ const generatedMapStyle = [
     "stylers": [
       {
         "color": "#d59563"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station.bus",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station.rail",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "stylers": [
+      {
+        "visibility": "on"
       }
     ]
   },
