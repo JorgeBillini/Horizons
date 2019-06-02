@@ -34,7 +34,7 @@ export default class Map extends React.Component {
 				customMapStyle= { generatedMapStyle }
 				minZoomLevel = { 14.5 }
 				maxZoomLevel = { 20 }
-				region={{
+				intialRegion={{
 				latitude: this.state.regionlatlong.latitude,
 				longitude: this.state.regionlatlong.longitude,
 				latitudeDelta: 0.0922,
