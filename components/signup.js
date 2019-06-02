@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
-// import { Button } from 'react-native-elements';
+import {ToggleAuthViewContext} from '../contexts/auth';
 
-export default class Login extends Component {
+export default class SignUp extends Component {
     state = {
         email: '',
-        password: ''
-    }
-    
-    onPressLogin = () =>{
-        console.log('login pressed!')
-        // connect to firebase
-        // show user profile
+        password: '',
+        interests: [],
     }
 
     onPressSignUp = () =>{
-        console.log('sign up pressed!')
+        console.log('pressed sign up! => firebase => db => profile')
+        // signup with firebase
+        // post user to db
+        // go to user profile page
     }
 
     render() {
@@ -24,7 +22,7 @@ export default class Login extends Component {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
             
-            {/* login form */}
+                {/* sign up form */}
                 <View style={styles.formContainer}>
                     <TextInput
                         placeholder='email'
@@ -35,7 +33,7 @@ export default class Login extends Component {
                         keyboardType='email-address'
                         autoCapitalize='none'
                         autoCorrect={false}
-                        onChangeText={(text) => this.setState({email: text})}
+                        onChangeText={(email) => this.setState({email})}
                         value={this.state.email}
                         />
                     <TextInput
@@ -51,25 +49,35 @@ export default class Login extends Component {
 
                     <TouchableOpacity 
                         style={styles.buttonContainer}
-                        onPress={this.onPressLogin}
-                    >
-                        <Text style={styles.buttonText}>
-                            LOGIN
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-
-            {/* signup option */}
-                <View style={styles.signUpContainer}>
-                    <Text style={styles.text}>New?</Text>
-                    <TouchableOpacity 
-                        style={styles.buttonContainer}
                         onPress={this.onPressSignUp}
                     >
                         <Text style={styles.buttonText}>
                             SIGN UP
                         </Text>
                     </TouchableOpacity>
+
+                    {/* login option */}
+                    <View style={styles.loginContainer}>
+                        <Text style={styles.text}>Already have an account?</Text>
+
+                        <ToggleAuthViewContext.Consumer>
+                            {
+                                toggle =>{
+                                    return (
+                                        <TouchableOpacity 
+                                            style={styles.buttonContainer}
+                                            onPress={() => toggle()}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                LOGIN
+                                            </Text>
+                                        </TouchableOpacity>
+                                    )
+                                }
+                            }
+                        </ToggleAuthViewContext.Consumer>
+
+                    </View>
                 </View>
 
             </KeyboardAvoidingView>
@@ -101,8 +109,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '700',
     },
-    signUpContainer: {
-        padding: 20
+    loginContainer: {
+        padding: 0,
+        marginTop: 25,
     },
     text: {
         textAlign: 'center',
