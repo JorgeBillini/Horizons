@@ -5,6 +5,7 @@ import UserProfile from '../screens/userProfile';
 import Details from '../screens/Details';
 import {createBottomTabNavigator,} from 'react-navigation';
 import React from 'react';
+// create navigation stack for main nav
 export default  RootStack = createBottomTabNavigator({
     Home: {
       screen: Map
