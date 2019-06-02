@@ -10,15 +10,12 @@ export default  RootStack = createBottomTabNavigator({
     Home: {
       screen: Map
     },
-
     List: {
-      screen:eventList
+      screen: eventList
     },
     Profile: {
-        screen:UserProfile
-      },
-  
-	
+      screen: UserProfile
+    },
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

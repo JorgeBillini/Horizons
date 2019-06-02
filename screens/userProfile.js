@@ -1,6 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
 import Login from '../components/login';
+import SignUp from '../components/signup';
+import Profile from '../components/profile';
+import {AuthContext, ToggleAuthViewContext,} from '../contexts/auth';
 
 export default class UserProfile extends React.Component{
     static navigationOptions= {
@@ -9,15 +11,35 @@ export default class UserProfile extends React.Component{
 
     state = {
         isLoggedIn: null,
+        signUpView: false,
     }
+
+    toggleLoginAndSignUpView = () =>{
+        const {signUpView} = this.state;
+        this.setState({signUpView: !signUpView});
+    }
+
     render(){
-        const {isLoggedIn} = this.state;
+        const {isLoggedIn, signUpView} = this.state;
+
         if (isLoggedIn){
-            return (<Text>User</Text>)
+            return (
+                <AuthContext.Provider value={isLoggedIn}>
+                    <Profile />
+                </AuthContext.Provider>
+            )
         } else {
             return (
-                <Login />
-            );
+                <ToggleAuthViewContext.Provider value={this.toggleLoginAndSignUpView}>
+                {   signUpView ?
+                        <SignUp />
+                        :
+                        <Login />
+                }
+                </ToggleAuthViewContext.Provider>
+            )
         }
+
+        
     }
 }

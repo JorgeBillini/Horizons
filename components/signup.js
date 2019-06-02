@@ -3,29 +3,29 @@ import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingVie
 import {ToggleAuthViewContext} from '../contexts/auth';
 import firebase from '../firebase';
 
-export default class Login extends Component {
+export default class SignUp extends Component {
     state = {
         email: '',
         password: '',
+        interests: [],
         error: '',
     }
-    
-    onPressLogin = () =>{
-        console.log('pressed login! verify thru firebase => db call => user profile')
+
+    onPressSignUp = () =>{
+        console.log('pressed sign up! => firebase => db => profile')
         const {email, password} = this.state;
 
-        // sign in & authenticate via firebase
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        // sign up with firebase
+        firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res =>{
-            console.log('login response: ', res);
-            
+            console.log(res);
         })
-        .catch(e =>{
+        .catch(e => {
             this.setState({error: e.message+'.'});
-        })
+        });
         
-        // get from db
-        // show user profile
+        // post user to db
+        // go to user profile page
     }
 
     render() {
@@ -34,7 +34,7 @@ export default class Login extends Component {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
             
-                {/* login form */}
+                {/* sign up form */}
                 <View style={styles.formContainer}>
                     <TextInput
                         placeholder='email'
@@ -45,7 +45,7 @@ export default class Login extends Component {
                         keyboardType='email-address'
                         autoCapitalize='none'
                         autoCorrect={false}
-                        onChangeText={(text) => this.setState({email: text})}
+                        onChangeText={(email) => this.setState({email})}
                         value={this.state.email}
                         />
                     <TextInput
@@ -61,41 +61,39 @@ export default class Login extends Component {
 
                     <TouchableOpacity 
                         style={styles.buttonContainer}
-                        onPress={this.onPressLogin}
+                        onPress={this.onPressSignUp}
                     >
                         <Text style={styles.buttonText}>
-                            LOGIN
+                            SIGN UP
                         </Text>
                     </TouchableOpacity>
 
-                </View>
+                    {/* login option */}
+                    <View style={styles.loginContainer}>
+                        <Text style={styles.text}>Already have an account?</Text>
 
-                {/* signup option */}
-                <View style={styles.signUpContainer}>
-                    <Text style={styles.text}>New?</Text>
-
-                    <ToggleAuthViewContext.Consumer>
-                        {
-                            toggle =>{
-                                return (
-                                    <TouchableOpacity 
-                                        style={styles.buttonContainer}
-                                        onPress={() => toggle()}
-                                    >
-                                        <Text style={styles.buttonText}>
-                                            SIGN UP
-                                        </Text>
-                                    </TouchableOpacity>
-                                )
+                        <ToggleAuthViewContext.Consumer>
+                            {
+                                toggle =>{
+                                    return (
+                                        <TouchableOpacity 
+                                            style={styles.buttonContainer}
+                                            onPress={() => toggle()}
+                                        >
+                                            <Text style={styles.buttonText}>
+                                                LOGIN
+                                            </Text>
+                                        </TouchableOpacity>
+                                    )
+                                }
                             }
-                        }
-                    </ToggleAuthViewContext.Consumer>
+                        </ToggleAuthViewContext.Consumer>
 
+                    </View>
                 </View>
 
             </KeyboardAvoidingView>
         )
-        
     }
 }
 
@@ -123,8 +121,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: '700',
     },
-    signUpContainer: {
-        padding: 20
+    loginContainer: {
+        padding: 0,
+        marginTop: 25,
     },
     text: {
         textAlign: 'center',
