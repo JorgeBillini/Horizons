@@ -25,9 +25,9 @@ export default class Map extends React.Component {
 					long: -74.0059
 				}]
 		}
-	}
-
-  	render() {
+  }
+    	render() {
+        let {navigate} = this.props.navigation;
     		return <>
 			<MapView
 				style={{ flex: 1 }}
@@ -60,7 +60,6 @@ export default class Map extends React.Component {
 				})
 			}
 			</MapView>
-			<Button title='Press Me' onPress={this.con}/>
     		</>
   	}
 	
