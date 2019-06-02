@@ -6,16 +6,17 @@ import requests from '../scripts/requests';
 export default class EventList extends React.Component {
     
     state = {
-
+        values: null,
     }
 
-    componentDidMount(){
-        console.log('hi')
+    componentDidMount = async () => {
+        requests.getEventsInRadius(41.2140224, -73.51878290000002, 0.0435)
     }
 
     static navigationOptions= {
         header:null
     }
+    
     render(){
         return (<EventCard />)
     }
