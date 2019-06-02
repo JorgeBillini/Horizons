@@ -449,6 +449,3 @@ const generatedMapStyle =
     ]
   }
 ]
-
-
-
