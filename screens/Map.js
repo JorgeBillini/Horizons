@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import { MapView } from 'expo'
-import * as locate from '../assets/locate.svg'
 import axios from 'axios'
 
 export default class Map extends React.Component {
