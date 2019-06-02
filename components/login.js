@@ -1,21 +1,18 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
-// import { Button } from 'react-native-elements';
+import {ToggleAuthViewContext} from '../contexts/auth';
 
 export default class Login extends Component {
     state = {
         email: '',
-        password: ''
+        password: '',
     }
     
     onPressLogin = () =>{
-        console.log('login pressed!')
+        console.log('pressed login! verify thru firebase => db call => user profile')
         // connect to firebase
+        // get from db
         // show user profile
-    }
-
-    onPressSignUp = () =>{
-        console.log('sign up pressed!')
     }
 
     render() {
@@ -24,7 +21,7 @@ export default class Login extends Component {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
             
-            {/* login form */}
+                {/* login form */}
                 <View style={styles.formContainer}>
                     <TextInput
                         placeholder='email'
@@ -57,23 +54,35 @@ export default class Login extends Component {
                             LOGIN
                         </Text>
                     </TouchableOpacity>
+
                 </View>
 
-            {/* signup option */}
+                {/* signup option */}
                 <View style={styles.signUpContainer}>
                     <Text style={styles.text}>New?</Text>
-                    <TouchableOpacity 
-                        style={styles.buttonContainer}
-                        onPress={this.onPressSignUp}
-                    >
-                        <Text style={styles.buttonText}>
-                            SIGN UP
-                        </Text>
-                    </TouchableOpacity>
+
+                    <ToggleAuthViewContext.Consumer>
+                        {
+                            toggle =>{
+                                return (
+                                    <TouchableOpacity 
+                                        style={styles.buttonContainer}
+                                        onPress={() => toggle()}
+                                    >
+                                        <Text style={styles.buttonText}>
+                                            SIGN UP
+                                        </Text>
+                                    </TouchableOpacity>
+                                )
+                            }
+                        }
+                    </ToggleAuthViewContext.Consumer>
+
                 </View>
 
             </KeyboardAvoidingView>
         )
+        
     }
 }
 
