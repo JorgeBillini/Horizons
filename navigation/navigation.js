@@ -7,7 +7,7 @@ import {createBottomTabNavigator,} from 'react-navigation';
 import React from 'react';
 export default  RootStack = createBottomTabNavigator({
     Home: {
-      screen: Details
+      screen: Map
     },
 
     List: {
