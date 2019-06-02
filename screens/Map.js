@@ -17,7 +17,7 @@ export default class Map extends React.Component {
 				latitude: 40.7127,
 				longitude: -74.0059,
 			},
-			events: [.00725, 2],
+			events: [],
 			places: [{
 					business_name: '',
 					lat: 40.7127,
@@ -26,7 +26,7 @@ export default class Map extends React.Component {
 		}
   }
     	render() {
-        let {navigate} = this.props.navigation;
+		console.log(this.state)
     		return <>
 			<MapView
 				style={{ flex: 1 }}
@@ -34,7 +34,7 @@ export default class Map extends React.Component {
 				customMapStyle= { generatedMapStyle }
 				minZoomLevel = { 14.5 }
 				maxZoomLevel = { 20 }
-				intialRegion={{
+				initialRegion={{
 				latitude: this.state.regionlatlong.latitude,
 				longitude: this.state.regionlatlong.longitude,
 				latitudeDelta: 0.0922,
@@ -44,7 +44,6 @@ export default class Map extends React.Component {
 				showsMyLocationButton = {true}
 				onUserLocationChange = {() => {
 					this.getUserLatLong()
-					this.getPlaces()
 				}}
 			>
 			{
@@ -54,7 +53,8 @@ export default class Map extends React.Component {
 						coordinate={{latitude: parseFloat(e.lat),
 							longitude: parseFloat(e.long)}}
 						title={e.business_name}
-						description={`Restaurant`}
+						description={``}
+						image={require('../assets/forknife.png')}
 					/>
 				})
 			}
@@ -63,13 +63,10 @@ export default class Map extends React.Component {
   	}
 	
 	componentDidMount(){
-		this.getRegionLatLong()
 		this.getUserLatLong()
-		this.getPlaces()
 	}
 
-	getPlaces = () => {
-		const {latitude, longitude} = this.state.userlatlong
+	getPlaces = (latitude, longitude) => {
 		axios.get(`http://horizons-api.herokuapp.com/places/?lat=${latitude}&long=${longitude}`)
 		.then(data=>{
 			const {msg} = data.data
@@ -77,18 +74,16 @@ export default class Map extends React.Component {
 		})
 	}
 
-	con = () => {
-		console.log(JSON.stringify(this.state.places))
-	}
-		
-	onUserLocaChange = () => {
-		
-	}
-
 	getUserLatLong = () => {
 		navigator.geolocation.getCurrentPosition(location=>{
 				const {latitude, longitude} = location.coords
-				this.setState({userlatlong: {latitude, longitude}})
+				const lat = this.state.userlatlong.latitude
+				const long = this.state.userlatlong.longitude
+				if(lat <= (latitude - (.00725/2)) || lat >= (latitude - (.00725/2)) || long <= (longitude - (.00725/2)) || long >= (longitude - (.00725/2))) {
+					this.setState({userlatlong: {latitude, longitude}})
+					this.getPlaces(latitude, longitude)
+					this.getRegionLatLong()
+				}
 			}
 		
 		)
