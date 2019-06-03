@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import {ToggleAuthViewContext} from '../contexts/auth';
 import firebase from '../firebase';
+import Axios from 'axios';
 
 export default class SignUp extends Component {
     state = {
@@ -19,18 +20,27 @@ export default class SignUp extends Component {
         // sign up with firebase
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res =>{
-            console.log(res);
+            console.log('created user in firebase...', res);
+            if(res.user){
+                const user = {username, email}
+
+        // post user to db
+                return Axios.post(`http://horizons-api.herokuapp.com/users/`, user);
+            } 
+        })
+        .then(res =>{
+            // console.log('user posted to db...', res);
         })
         .catch(e => {
+            console.log('user sign up error...', e);
             this.setState({error: e.message+'.'});
         });
         
-        // post user to db
-        // go to user profile page
+        
+        // go to user profile page via firebase auth on userProfile.js
     }
 
     render() {
-        console.log(this.state);
 
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
