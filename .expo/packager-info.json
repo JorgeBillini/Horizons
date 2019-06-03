@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://e8-rpi.ktaneja.horizons-frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.e8-rpi.ktaneja.horizons-frontend.exp.direct",
-  "ngrokPid": 29894,
+  "expoServerPort": null,
+  "expoServerNgrokUrl": "https://e8-rpi.anonymous.horizons-frontend.exp.direct",
+  "packagerNgrokUrl": "https://packager.e8-rpi.anonymous.horizons-frontend.exp.direct",
+  "ngrokPid": 3672,
   "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 29883
+  "packagerPort": null,
+  "packagerPid": null
 }

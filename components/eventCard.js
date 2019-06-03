@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Dimensions } from 'react-native';
-import { Container, Header, Content, Card, CardItem, Body, Badge, Left, Right, Text } from 'native-base';
+import { Button, Content, Card, CardItem, Body, Badge, Left, Right, Text, Container,} from 'native-base';
 
 const selfCenter = { alignSelf: 'center' };
 const padL = { paddingLeft: 10 };
@@ -16,9 +16,9 @@ const phHeight = Math.floor(phWidth/2)
 export default class EventCard extends Component {
   render() {
     return (
-      <Container>
-        <Header/>
-        <Content>
+      <>
+      <Container style={row}>
+      <Content >
           <Card>
             <CardItem>
               <Image
@@ -64,14 +64,20 @@ export default class EventCard extends Component {
             </CardItem>
             <CardItem footer bordered>
               <Body style={padL}>
-                <Text style={selfCenter}>
-                  Map
-                </Text>
+                <Button
+                style={selfCenter}
+                // onPress={()=>{this.props.navigation.navigate('details',{id:this.props.id})}}
+                >
+                 <Text>See more details</Text>
+                </Button>
               </Body>
             </CardItem>
           </Card>
         </Content>
       </Container>
+      
+       
+        </>
     );
   }
 }
