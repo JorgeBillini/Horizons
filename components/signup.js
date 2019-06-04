@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import {ToggleAuthViewContext} from '../contexts/auth';
 import firebase from '../firebase';
+import Axios from 'axios';
 
 export default class SignUp extends Component {
     state = {
+        username: '',
         email: '',
         password: '',
         interests: [],
@@ -13,23 +15,32 @@ export default class SignUp extends Component {
 
     onPressSignUp = () =>{
         console.log('pressed sign up! => firebase => db => profile')
-        const {email, password} = this.state;
+        const {username, email, password} = this.state;
 
         // sign up with firebase
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(res =>{
-            console.log(res);
+            console.log('created user in firebase...', res);
+            if(res.user){
+                const user = {username, email}
+
+        // post user to db
+                return Axios.post(`http://horizons-api.herokuapp.com/users/`, user);
+            } 
+        })
+        .then(res =>{
+            // console.log('user posted to db...', res);
         })
         .catch(e => {
+            console.log('user sign up error...', e);
             this.setState({error: e.message+'.'});
         });
         
-        // post user to db
-        // go to user profile page
+        
+        // go to user profile page via firebase auth on userProfile.js
     }
 
     render() {
-        console.log(this.state);
 
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -37,10 +48,24 @@ export default class SignUp extends Component {
                 {/* sign up form */}
                 <View style={styles.formContainer}>
                     <TextInput
+                        placeholder='username'
+                        placeholderTextColor='rgba(255,255,255,0.7)'
+                        style={styles.input}
+                        returnKeyType='next'
+                        onSubmitEditing={ () => this.email.focus() }
+                        keyboardType='default'
+                        autoCapitalize='none'
+                        autoCorrect={false}
+                        onChangeText={(username) => this.setState({username})}
+                        value={this.state.username}
+                        />
+
+                    <TextInput
                         placeholder='email'
                         placeholderTextColor='rgba(255,255,255,0.7)'
                         style={styles.input}
                         returnKeyType='next'
+                        ref={input => this.email = input}
                         onSubmitEditing={ () => this.pwInput.focus() }
                         keyboardType='email-address'
                         autoCapitalize='none'
@@ -48,6 +73,7 @@ export default class SignUp extends Component {
                         onChangeText={(email) => this.setState({email})}
                         value={this.state.email}
                         />
+
                     <TextInput
                         placeholder='password'
                         secureTextEntry
@@ -101,7 +127,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'lightblue',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingTop: 20
     },
     formContainer: {
         padding: 20
