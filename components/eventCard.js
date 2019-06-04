@@ -17,13 +17,12 @@ export default class EventCard extends Component {
   render() {
     return (
       <>
-      <Container style={row}>
       <Content >
           <Card>
             <CardItem>
               <Image
               style={{width: phWidth, height: phHeight}}
-              source={{uri: `https://via.placeholder.com/${phWidth}x${phHeight}`}} />
+              source={{uri: `${this.props.image}`}} />
             </CardItem>
             <CardItem style={noPad}>
               <Left>
@@ -74,7 +73,6 @@ export default class EventCard extends Component {
             </CardItem>
           </Card>
         </Content>
-      </Container>
       
        
         </>

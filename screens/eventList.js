@@ -5,6 +5,7 @@ import requests from '../scripts/requests';
 import axios from 'axios'
 import {InteractionManager} from 'react-native'
 import { View } from 'native-base';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class EventList extends React.Component {
     static navigationOptions= {header:null}
@@ -28,38 +29,54 @@ export default class EventList extends React.Component {
     
 
     componentDidMount = async () => {
-        InteractionManager.runAfterInteractions(()=>{
-            this.getUserLatLong();
-            this.getPlaces();
+        InteractionManager.runAfterInteractions(async()=>{
+            await this.getUserLatLong();
+            await this.getPlaces();
         })
     }
-    getPlaces = () => {
+    getPlaces = async () => {
 		const {latitude, longitude} = this.state.userlatlong
 		axios.get(`http://horizons-api.herokuapp.com/places/?lat=${latitude}&long=${longitude}`)
-		.then(data=>{
+		.then(async data=>{
 			const {msg} = data.data
 			this.setState({places: msg},()=>{
                 console.log(this.state , "after update")
             })
 		})
-	}
-
-	getUserLatLong = () => {
-		navigator.geolocation.getCurrentPosition(location=>{
+    }
+	getUserLatLong = async () => {
+		navigator.geolocation.getCurrentPosition(async location=>{
+                console.log(location)
 				const {latitude, longitude} = location.coords
-				this.setState({userlatlong: {latitude, longitude}})
+				this.setState({userlatlong: {latitude, longitude}},()=>{
+                    console.log(this.state, "state after getting user locations")
+                })
 			}
 		
 		)
-	}	
+    }
+    componentDidUpdate = async () => {
+        navigator.geolocation.getCurrentPosition( async location=>{
+            if(this.state.userlatlong.latitude === location.coords.latitude ){
+                return;
+            }
+            else{
+                await this.getUserLatLong();
+                await this.getPlaces()
+            }
+
+        })
+    }
     render(){
         return (
             <>
+            <ScrollView>
             {
                 this.state.places.map((e,i)=>{
-                    return <EventCard  key={i}/>
+                    return <EventCard  image={e.img_url}key={i}/>
                 })
             }
+            </ScrollView>
             </>
 
         )
