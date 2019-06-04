@@ -1,5 +1,5 @@
 import Map from '../screens/Map';
-import eventList from '../screens/eventList';
+import EventList from '../screens/eventList';
 import { Ionicons } from '@expo/vector-icons';
 import UserProfile from '../screens/userProfile';
 import Details from '../screens/Details';
@@ -11,7 +11,7 @@ export default  RootStack = createBottomTabNavigator({
       screen: Map
     },
     List: {
-      screen: eventList
+      screen: EventList
     },
     Profile: {
       screen: UserProfile

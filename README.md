@@ -8,4 +8,4 @@ In order to start this project, you might need the following dependencies, so ma
 2. WatchMan
 
 ## To Run:
-run ``npm install first ``then run ``exp start`` and you will be able to open up the default bundler built in with expo. Additionally, you can run the command ``exp run ios`` or ``exp run android`` to start an emulator instance.
+run ``npm install  `` first then run ``expo start`` and you will be able to open up the default bundler built in with expo. Additionally, you can run the command ``expo run ios`` or ``expo run android`` to start an emulator instance.
