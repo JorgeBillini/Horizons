@@ -31,6 +31,8 @@ export default class Login extends Component {
             
                 {/* login form */}
                 <View style={styles.formContainer}>
+                    <Text style={styles.greeting}>Welcome back</Text>
+
                     <TextInput
                         placeholder='email'
                         placeholderTextColor='rgba(255,255,255,0.7)'
@@ -100,6 +102,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightblue',
         justifyContent: 'center'
     },
+    greeting: {
+        color: '#3582DB',
+        textAlign: 'center',
+        fontWeight: '700',
+        fontSize: 20,
+        marginBottom: 15
+    },
     formContainer: {
         padding: 20
     },
@@ -107,11 +116,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.5)',
         height: 40,
         marginBottom: 20,
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
+        borderRadius: 20
     },
     buttonContainer: {
         backgroundColor: '#3582DB',
         paddingVertical: 15,
+        borderRadius: 20
     },
     buttonText: {
         color: 'white',
@@ -119,7 +130,8 @@ const styles = StyleSheet.create({
         fontWeight: '700',
     },
     signUpContainer: {
-        padding: 20
+        padding: 20,
+        borderRadius: 20
     },
     text: {
         textAlign: 'center',

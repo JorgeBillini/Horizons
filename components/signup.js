@@ -22,7 +22,7 @@ export default class SignUp extends Component {
         .then(res =>{
             console.log('created user in firebase...', res);
             if(res.user){
-                const user = {username, email}
+                const user = {username, email, xp: 0}
 
         // post user to db
                 return Axios.post(`http://horizons-api.herokuapp.com/users/`, user);
@@ -47,6 +47,8 @@ export default class SignUp extends Component {
             
                 {/* sign up form */}
                 <View style={styles.formContainer}>
+                    <Text style={styles.greeting}> Ready for your new adventure? </Text>
+
                     <TextInput
                         placeholder='username'
                         placeholderTextColor='rgba(255,255,255,0.7)'
@@ -130,6 +132,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 20
     },
+    greeting: {
+        color: '#3582DB',
+        textAlign: 'center',
+        fontWeight: '700',
+        fontSize: 20,
+        marginBottom: 15
+    },
     formContainer: {
         padding: 20
     },
@@ -137,11 +146,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.5)',
         height: 40,
         marginBottom: 20,
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
+        borderRadius: 20
     },
     buttonContainer: {
         backgroundColor: '#3582DB',
         paddingVertical: 15,
+        borderRadius: 20
     },
     buttonText: {
         color: 'white',

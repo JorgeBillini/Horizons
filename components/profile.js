@@ -19,11 +19,26 @@ export default class Profile extends Component{
                                 <Text style={styles.email}> {user.email} </Text>
                             </View>
                             
-                            
+                            <View>
+                                <Text>badges...</Text>
+                            </View>
+
+                            <View>
+                                <Text>xp pts progress bar: {user.xp}</Text>
+                            </View>
+
+                            <View>
+                                <Text>Events Created For Today</Text>
+                            </View>
+
+                            <View>
+                                <Text>Past Created Events</Text>
+                            </View>
+
 
                             {/* logout button */}
                             <TouchableOpacity 
-                                style={styles.logoutContainer}
+                                style={styles.logoutBtn}
                                 onPress={()=>{firebase.auth().signOut()}}
                             >
                                 <Text style={styles.logoutText}>
@@ -61,7 +76,7 @@ const styles = StyleSheet.create({
     email: {
         textAlign: 'center',
     },
-    logoutContainer: {
+    logoutBtn: {
         backgroundColor: 'grey',
         paddingVertical: 15,
         borderColor: 'grey',
