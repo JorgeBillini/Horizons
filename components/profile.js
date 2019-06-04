@@ -11,14 +11,15 @@ export default class Profile extends Component{
                 user =>{
                     const profilePic = user.pic ? user.pic : genericUserPic;
                     return (
-                        <KeyboardAvoidingView>
+                        <KeyboardAvoidingView style={styles.container}>
                             
-                            <View style={styles.profile}>
-                                <Image source={profilePic} />
-                                <Text> {user.username} </Text>
+                            <View style={styles.profileContainer}>
+                                <Image source={profilePic} style={styles.profileImg}/>
+                                <Text style={styles.username}> {user.username} </Text>
+                                <Text style={styles.email}> {user.email} </Text>
                             </View>
                             
-                            <Text> {user.email} </Text>
+                            
 
                             {/* logout button */}
                             <TouchableOpacity 
@@ -39,10 +40,26 @@ export default class Profile extends Component{
 }
 
 const styles = StyleSheet.create({
-    profile: {
-        borderColor: 'black',
-        borderWidth: 1,
-        
+    container: {
+        paddingHorizontal: 15
+    },
+    profileContainer: {
+        marginTop: 25,
+    },
+    profileImg: {
+        width: 125,
+        height: 125,
+        alignSelf: 'center',
+    },
+    username: {
+        textAlign: 'center',
+        fontWeight: '700',
+        fontSize: 20,
+        marginTop: 10,
+        color: 'green',
+    },
+    email: {
+        textAlign: 'center',
     },
     logoutContainer: {
         backgroundColor: 'grey',
