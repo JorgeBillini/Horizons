@@ -18,18 +18,13 @@ export default class Login extends Component {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res =>{
             console.log('login response: ', res);
-            
         })
         .catch(e =>{
             this.setState({error: e.message+'.'});
         })
-        
-        // get from db
-        // show user profile
     }
 
     render() {
-        console.log(this.state);
 
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
