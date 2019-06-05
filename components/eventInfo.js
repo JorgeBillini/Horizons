@@ -6,6 +6,7 @@ import {Dimensions} from 'react-native';
 export default props =>{
     const height = Dimensions.get('window').height;
     const width = Dimensions.get('window').width;
+    console.log(props.id);
     return(
     <>
         <View style={{backgroundColor:'black',height:height}}>
@@ -28,6 +29,7 @@ export default props =>{
             </View>
             <View style={{padding:10}}>
                 <Text style={{color:'white'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+                <Text style={{color:'white'}}>{props.id} is id</Text>
             </View>
             <Button title="Go Here"></Button>
            
