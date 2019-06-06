@@ -14,7 +14,7 @@ const phHeight = Math.floor(phWidth/2)
 
 export default class EventCard extends Component {
   render() {
-    
+    console.log(this.props.categories,'      ', typeof(categories))
     return (
       <>
       <Content >
