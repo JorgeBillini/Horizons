@@ -1,14 +1,35 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import {ToggleAuthViewContext} from '../contexts/auth';
+import firebase from '../firebase';
 
 export default class Login extends Component {
+    state = {
+        email: '',
+        password: '',
+        error: '',
+    }
+    
+    onPressLogin = () =>{
+        console.log('pressed login! verify thru firebase => db call => user profile')
+        const {email, password} = this.state;
+
+        // sign in & authenticate via firebase
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(res =>{
+            console.log('login response: ', res);
+        })
+        .catch(e =>{
+            this.setState({error: e.message+'.'});
+        })
+    }
+
     render() {
+
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <View>
-                    <Text style={styles.title}>Log In</Text>
-                </View>
-
+            
+                {/* login form */}
                 <View style={styles.formContainer}>
                     <TextInput
                         placeholder='email'
@@ -19,6 +40,8 @@ export default class Login extends Component {
                         keyboardType='email-address'
                         autoCapitalize='none'
                         autoCorrect={false}
+                        onChangeText={(text) => this.setState({email: text})}
+                        value={this.state.email}
                         />
                     <TextInput
                         placeholder='password'
@@ -27,16 +50,47 @@ export default class Login extends Component {
                         style={styles.input}
                         returnKeyType='go'
                         ref={input => this.pwInput = input}
+                        onChangeText={(text) => this.setState({password: text})}
+                        value={this.state.password}
                         />
 
-                    <TouchableOpacity style={styles.buttonContainer}>
+                    <TouchableOpacity 
+                        style={styles.buttonContainer}
+                        onPress={this.onPressLogin}
+                    >
                         <Text style={styles.buttonText}>
                             LOGIN
                         </Text>
                     </TouchableOpacity>
+
                 </View>
+
+                {/* signup option */}
+                <View style={styles.signUpContainer}>
+                    <Text style={styles.text}>New?</Text>
+
+                    <ToggleAuthViewContext.Consumer>
+                        {
+                            toggle =>{
+                                return (
+                                    <TouchableOpacity 
+                                        style={styles.buttonContainer}
+                                        onPress={() => toggle()}
+                                    >
+                                        <Text style={styles.buttonText}>
+                                            SIGN UP
+                                        </Text>
+                                    </TouchableOpacity>
+                                )
+                            }
+                        }
+                    </ToggleAuthViewContext.Consumer>
+
+                </View>
+
             </KeyboardAvoidingView>
         )
+        
     }
 }
 
@@ -45,9 +99,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'lightblue',
         justifyContent: 'center'
-    },
-    title: {
-        textAlign: 'center',
     },
     formContainer: {
         padding: 20
@@ -59,12 +110,19 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     buttonContainer: {
-        backgroundColor: '#2980B9',
+        backgroundColor: '#3582DB',
         paddingVertical: 15,
     },
     buttonText: {
         color: 'white',
         textAlign: 'center',
-        fontWeight: '700'
+        fontWeight: '700',
+    },
+    signUpContainer: {
+        padding: 20
+    },
+    text: {
+        textAlign: 'center',
+        paddingVertical: 15,
     }
 });
