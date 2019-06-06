@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+import Map from '../screens/Map.js';
+import eventList from '../screens/eventList';
+=======
 import Map from '../screens/Map';
+>>>>>>> 8fc49bee0b239394688e092681e901bd44064030
 import { Ionicons } from '@expo/vector-icons';
 import UserProfile from '../screens/userProfile';
 import EventContainer from './listViewScreens';
