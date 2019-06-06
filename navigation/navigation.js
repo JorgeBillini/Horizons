@@ -43,6 +43,13 @@ export default  RootStack = createBottomTabNavigator({
         inactiveBackgroundColor:'black',
         activeTintColor: 'gray',
         inactiveTintColor: 'white',
+        safeAreaInset:{
+          bottom:'always'
+        },
+        style:{
+          backgroundColor:'black'
+        }
+        
       },
 
 })

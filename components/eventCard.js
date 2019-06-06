@@ -14,7 +14,7 @@ const phHeight = Math.floor(phWidth/2)
 
 export default class EventCard extends Component {
   render() {
-  
+    
     return (
       <>
       <Content >
@@ -41,7 +41,7 @@ export default class EventCard extends Component {
             <CardItem style={noPad}>
               <Body style={{...padL, ...row}}>
                 <Text style={padRs}>
-                  [  ]
+                  []
                 </Text>
                 <Text style={padRs}>
                   [ 2 ]
@@ -69,7 +69,7 @@ export default class EventCard extends Component {
                 onPress={()=>{
                   this.props.navigate('Details',{id:this.props.id})}}
                 >
-                </Button>
+                  </Button>
               </Body>
             </CardItem>
           </Card>

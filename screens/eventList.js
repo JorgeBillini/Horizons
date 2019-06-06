@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import EventCard from '../components/eventCard';
 import axios from 'axios'
-import {InteractionManager} from 'react-native'
+import {InteractionManager,StatusBar} from 'react-native'
 import { View } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -69,7 +69,7 @@ export default class EventList extends React.Component {
         const {navigate} = this.props.navigation;
         return (
             <>
-            <ScrollView>
+            <ScrollView style={{marginTop:50}}>
             {
                 this.state.places.map((e,i)=>{
                     console.log(e.categories);

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import EventInfo from '../components/eventInfo';
 import {createStackNavigator} from 'react-navigation';
+import { View } from 'native-base';
 export default class Details extends React.Component {
     static navigationOptions= {
         header:null

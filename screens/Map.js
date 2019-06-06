@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
-import { MapView } from 'expo'
+import { Button, StyleSheet, View} from 'react-native';
+import { MapView, } from 'expo'
 import axios from 'axios'
 
 export default class Map extends React.Component {
@@ -28,6 +28,7 @@ export default class Map extends React.Component {
     	render() {
         let {navigate} = this.props.navigation;
     		return <>
+
 			<MapView
 				style={{ flex: 1 }}
 				provider={ MapView.PROVIDER_GOOGLE }

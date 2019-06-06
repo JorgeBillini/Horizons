@@ -9,27 +9,27 @@ export default props =>{
     console.log(props.id);
     return(
     <>
-        <View style={{backgroundColor:'black',height:height}}>
+        <View style={{backgroundColor:'white',height:height}}>
         <Header
-            centerComponent={{ text: 'Event Details', style:{color:'white' ,fontSize:25} }}
-            backgroundColor={'black'}
+            centerComponent={{ text: "", style:{color:'black' ,fontSize:25} }}
+            backgroundColor={'white'}
             />
-            <View style={{backgroundColor:'black'}}>
+            <View style={{backgroundColor:'white'}}>
             <View style={{justifyContent:'center',alignItems:'center'}}>
           <Image source={{uri: 'https://facebook.github.io/react/logo-og.png'}}
             style={{width:width, height:height/3}} />
             </View>
-            <Divider style={{backgroundColor:'white'}}/>
+            <Divider style={{backgroundColor:'black'}}/>
             <ScrollView>
             <View>
-                <Text style={{textAlign:'left',fontSize:30,color:'white'}}>Name</Text>
+                <Text style={{textAlign:'left',fontSize:30,color:'black', padding:8}}>Name</Text>
             </View>
             <View>
-                <Text style={{textAlign:'left',fontSize:25,color:'white'}}>Free</Text>
+                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>Free</Text>
             </View>
             <View style={{padding:10}}>
-                <Text style={{color:'white'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
-                <Text style={{color:'white'}}>{props.id} is id</Text>
+                <Text style={{color:'black'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
+                <Text style={{color:"black"}}>{props.id} is id</Text>
             </View>
             <Button title="Go Here"></Button>
            
