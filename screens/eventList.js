@@ -7,7 +7,6 @@ export default class eventList extends React.Component {
         header:null
       }
     render(){
-        let {navigate} = this.props.navigation;
         return (<>
         
         <Text>Hi guys, this is event list </Text>

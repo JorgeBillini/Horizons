@@ -1,4 +1,4 @@
-import Map from '../screens/Map';
+import Map from '../screens/Map.js';
 import eventList from '../screens/eventList';
 import { Ionicons } from '@expo/vector-icons';
 import UserProfile from '../screens/userProfile';
