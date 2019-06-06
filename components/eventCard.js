@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Image, Dimensions } from 'react-native';
-import { Button, Content, Card, CardItem, Body, Badge, Left, Right, Text, Container,} from 'native-base';
-
+import { Image, Dimensions,Button } from 'react-native';
+import { Content, Card, CardItem, Body, Badge, Left, Right, Text, Container,} from 'native-base';
 const selfCenter = { alignSelf: 'center' };
 const padL = { paddingLeft: 10 };
 const padR = { paddingRight: 10 };
@@ -15,6 +14,7 @@ const phHeight = Math.floor(phWidth/2)
 
 export default class EventCard extends Component {
   render() {
+    
     return (
       <>
       <Content >
@@ -27,13 +27,13 @@ export default class EventCard extends Component {
             <CardItem style={noPad}>
               <Left>
                 <Text style={h1}>
-                  Event Name
+                  {this.props.name || this.props.event_name}
                 </Text>
               </Left>
               <Right>
                 <Badge style={padR} primary>
                   <Text>
-                    Tag
+                    {this.props.price}
                   </Text>
                 </Badge>
               </Right>
@@ -41,7 +41,7 @@ export default class EventCard extends Component {
             <CardItem style={noPad}>
               <Body style={{...padL, ...row}}>
                 <Text style={padRs}>
-                  [ 1 ]
+                  []
                 </Text>
                 <Text style={padRs}>
                   [ 2 ]
@@ -54,7 +54,7 @@ export default class EventCard extends Component {
             <CardItem>
               <Body style={{...padL}}>
                 <Text>
-                  Event Address
+                  {this.props.address}
                 </Text>
                 <Text>
                   Event Hours
@@ -64,11 +64,12 @@ export default class EventCard extends Component {
             <CardItem footer bordered>
               <Body style={padL}>
                 <Button
+                title="See more details"
                 style={selfCenter}
-                // onPress={()=>{this.props.navigation.navigate('details',{id:this.props.id})}}
+                onPress={()=>{
+                  this.props.navigate('Details',{id:this.props.id})}}
                 >
-                 <Text>See more details</Text>
-                </Button>
+                  </Button>
               </Body>
             </CardItem>
           </Card>

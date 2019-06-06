@@ -1,17 +1,18 @@
 import Map from '../screens/Map';
-import EventList from '../screens/eventList';
 import { Ionicons } from '@expo/vector-icons';
 import UserProfile from '../screens/userProfile';
-import Details from '../screens/Details';
+import EventContainer from './listViewScreens';
 import {createBottomTabNavigator,} from 'react-navigation';
 import React from 'react';
+import Details from '../screens/Details';
 // create navigation stack for main nav
 export default  RootStack = createBottomTabNavigator({
     Home: {
       screen: Map
     },
     List: {
-      screen: EventList
+      screen: EventContainer,
+      path:'/event'
     },
     Profile: {
       screen: UserProfile
@@ -42,6 +43,13 @@ export default  RootStack = createBottomTabNavigator({
         inactiveBackgroundColor:'black',
         activeTintColor: 'gray',
         inactiveTintColor: 'white',
+        safeAreaInset:{
+          bottom:'always'
+        },
+        style:{
+          backgroundColor:'black'
+        }
+        
       },
 
 })

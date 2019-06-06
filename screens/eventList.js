@@ -1,9 +1,8 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import EventCard from '../components/eventCard';
-import requests from '../scripts/requests';
 import axios from 'axios'
-import {InteractionManager} from 'react-native'
+import {InteractionManager,StatusBar} from 'react-native'
 import { View } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -40,16 +39,15 @@ export default class EventList extends React.Component {
 		.then(async data=>{
 			const {msg} = data.data
 			this.setState({places: msg},()=>{
-                console.log(this.state , "after update")
+                console.log( "after update")
             })
 		})
     }
 	getUserLatLong = async () => {
 		navigator.geolocation.getCurrentPosition(async location=>{
-                console.log(location)
 				const {latitude, longitude} = location.coords
 				this.setState({userlatlong: {latitude, longitude}},()=>{
-                    console.log(this.state, "state after getting user locations")
+                    console.log("state after getting user locations")
                 })
 			}
 		
@@ -68,12 +66,14 @@ export default class EventList extends React.Component {
         })
     }
     render(){
+        const {navigate} = this.props.navigation;
         return (
             <>
-            <ScrollView>
+            <ScrollView style={{marginTop:50}}>
             {
                 this.state.places.map((e,i)=>{
-                    return <EventCard  image={e.img_url}key={i}/>
+                    console.log(e.categories);
+                    return <EventCard  navigate={navigate} price={e.price} address={e.address_} name={e.business_name} categories={e.categories}image={e.img_url}key={i} id={e.id}/>
                 })
             }
             </ScrollView>
