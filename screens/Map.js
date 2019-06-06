@@ -51,7 +51,11 @@ export default class Map extends React.Component {
 							longitude: e.coordinates.longitude
 						}}
 						>
-						<Callout>
+						<Callout
+            onPress={()=>{
+              this.props.navigation.navigate('Details',{id:e.id})}
+
+            }>
 							<View>
 								<Text>{e.name}</Text>
 							</View>
