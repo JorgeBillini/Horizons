@@ -51,7 +51,11 @@ export default class Map extends React.Component {
 							longitude: e.coordinates.longitude
 						}}
 						>
-						<Callout>
+						<Callout
+							onPress = { () => {
+								console.log(1)
+							} }
+						>
 							<View>
 								<Text>{e.name}</Text>
 							</View>
@@ -68,13 +72,16 @@ export default class Map extends React.Component {
 	
 	getEvents = (latitude, longitude) => {
 		const 	min_lat = latitude - 0.00725
-			min_long = longitude - 0.00909
+			min_long = longitude - 0.00725
 			max_lat = latitude + 0.00725
-			max_long = longitude + 0.00909
+			max_long = longitude + 0.00725
 			url = `http://horizons-api.herokuapp.com/events`
 			term = `?min_lat=${min_lat}&max_lat=${max_lat}&min_long=${min_long}&max_long=${max_long}`
 		axios.get(`${url}${term}`)
-		.then(res=>console.log(JSON.stringify(res)))
+		.then(res=>
+			const { data } = res.data
+			this.setState({ events: data })
+		)
 		.catch(_ => _)
 	}
 
@@ -97,7 +104,7 @@ export default class Map extends React.Component {
 			const 	{latitude, longitude} = location.coords
 				lat = this.state.userlatlong.latitude
 				long = this.state.userlatlong.longitude
-			if(lat <= (latitude - (.00725/2)) || lat >= (latitude + (.00725/2) ) || long <= (longitude - (.00909/2)) || long >= (longitude + (.00909/2))) {
+			if(lat <= (latitude - (.00725/2)) || lat >= (latitude + (.00725/2) ) || long <= (longitude - (.00725/2)) || long >= (longitude + (.00725/2))) {
 				this.setState({userlatlong: {latitude, longitude}})
 				this.getPlaces(latitude, longitude)
 				this.getEvents(latitude, longitude)
