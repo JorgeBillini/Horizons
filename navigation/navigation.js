@@ -3,13 +3,13 @@ import eventList from '../screens/eventList';
 import { Ionicons } from '@expo/vector-icons';
 import UserProfile from '../screens/userProfile';
 import EventContainer from './listViewScreens';
+import MapContainer from './MaptoDetails';
 import {createBottomTabNavigator,} from 'react-navigation';
 import React from 'react';
-import Details from '../screens/Details';
 // create navigation stack for main nav
 export default  RootStack = createBottomTabNavigator({
     Home: {
-      screen: Map
+      screen: MapContainer
     },
     List: {
       screen: EventContainer,

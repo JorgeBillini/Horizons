@@ -52,9 +52,9 @@ export default class Map extends React.Component {
 						}}
 						>
 						<Callout
-							onPress = { () => {
-								console.log(1)
-							} }
+            						onPress={()=>{
+              							this.props.navigation.navigate('Details',{id:e.id})}
+							}
 						>
 							<View>
 								<Text>{e.name}</Text>
