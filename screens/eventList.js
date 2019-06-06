@@ -72,7 +72,6 @@ export default class EventList extends React.Component {
             <ScrollView style={{marginTop:50}}>
             {
                 this.state.places.map((e,i)=>{
-                    console.log(e.categories);
                     return <EventCard  navigate={navigate} price={e.price} address={e.address_} name={e.business_name} categories={e.categories}image={e.img_url}key={i} id={e.id}/>
                 })
             }
