@@ -14,7 +14,7 @@ const phHeight = Math.floor(phWidth/2)
 
 export default class EventCard extends Component {
   render() {
-    console.log(this.props.data , ' ', "is data for event card")
+    console.log(this.props.data.location.display_address , ' ', "is data for event card")
     return (
       <>
       <Content >
@@ -41,13 +41,10 @@ export default class EventCard extends Component {
             <CardItem style={noPad}>
               <Body style={{...padL, ...row}}>
                 <Text style={padRs}>
-                  []
+                  {this.props.data.location.display_address[0]}
                 </Text>
                 <Text style={padRs}>
-                  [ 2 ]
-                </Text>
-                <Text>
-                  [ 3 ]
+                  - {this.props.data.location.display_address[1] }
                 </Text>
               </Body>
             </CardItem>

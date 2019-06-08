@@ -77,7 +77,7 @@ export default class EventList extends React.Component {
             <>
             <ScrollView style={{marginTop:50}}>
             {
-                this.state.loading === true ? <Button loading type="clear" buttonStyle={{color:'black', alignItems:'center'}} size={32} />:
+                this.state.loading === true ? <Button loading type="clear"  size={42} />:
                 this.state.places.map((e,i)=>{
                     return <EventCard navigate={navigate} data={e} key={i}/>
                 })

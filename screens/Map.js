@@ -60,8 +60,30 @@ export default class Map extends React.Component {
 								<Text>{e.name}</Text>
 							</View>
 						</Callout>
-						</Marker>})
-				}
+            </Marker>})
+        }
+        {
+          this.state.events.map((e,i)=>{
+            return (
+            	 <Marker
+						key = { i }
+						coordinate = {{ 
+							latitude: e.lat,
+							longitude: e.long
+						}}
+						>
+						<Callout
+            onPress={()=>{
+              this.props.navigation.navigate('Details',{data:e})}
+
+            }>
+							<View>
+								<Text>{e.name_}</Text>
+							</View>
+						</Callout>
+						</Marker>)
+          })
+        }
 			</MapView>
 		</>
 	}
@@ -78,7 +100,7 @@ export default class Map extends React.Component {
 			url = `http://horizons-api.herokuapp.com/events`
 			term = `?min_lat=${min_lat}&max_lat=${max_lat}&min_long=${min_long}&max_long=${max_long}`
 		axios.get(`${url}${term}`)
-		.then(res=>console.log(JSON.stringify(res)))
+		.then(res=>this.setState({events:res.data.data}))
 		.catch(_ => _)
 	}
 
