@@ -6,7 +6,7 @@ const Container = createAppContainer(RootStack);
 
 export default App = () => {
     return (<>
-                <StatusBar backgroundColor="blue" barStyle="light-content" />
+                <StatusBar backgroundColor="blue" barStyle="dark-content" />
                 <Container style={{flex:1}}/>
     
     </>
