@@ -1,8 +1,5 @@
 import React from 'react';
-import axios from 'axios';
 import EventInfo from '../components/eventInfo';
-import {createStackNavigator} from 'react-navigation';
-import { View } from 'native-base';
 export default class Details extends React.Component {
     static navigationOptions= {
         header:null
@@ -12,18 +9,17 @@ export default class Details extends React.Component {
           state={
             id:null,
             data:{},
-            type:'event'
           }
       }
       componentWillMount(){
-        const id = this.props.navigation.getParam('id',1)
-          this.setState({type:'event',id:id})
+        const data = this.props.navigation.getParam('data','loading')
+          this.setState({type:'event',data:data})
       }
       render(){
           return (
           <>
           {
-              this.state.type === 'event' ? <EventInfo id={this.state.id}/>:<></>
+              this.state.type === 'event' ? <EventInfo data={this.state.data}/>:<></>
           }
           </>)
       }
