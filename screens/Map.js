@@ -9,60 +9,98 @@ export default class Map extends React.Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			events: [],
+			events: [{
+				lat: 0,
+				long: 0
+			}],
 			places: [],
-			regionlatlong: {
-				latitude: 40.7217,
-				longitude: -74.0059, 
-			},
 			userlatlong: {
-				latitude: 40.7217,
-				longitude: -74.0059,
+				latitude: null,
+				longitude: null,
 			},
 		}
 	}
 
 	render() {
 		return <>
-			<MapView
-					style = {{ flex: 1 }}
-					initialRegion = {{
-						latitude: this.state.regionlatlong.latitude,
-						longitude: this.state.regionlatlong.longitude,
-						latitudeDelta: 0.0922,
-						longitudeDelta: 0.0421,
-					}}
-					provider = { MapView.PROVIDER_GOOGLE }
-					customMapStyle = { generatedMapStyle }
-					minZoomLevel = { 14.5 }
-					maxZoomLevel = { 20 }
-					showsUserLocation = { true }
-					showsMyLocationButton = { true }
-					onUserLocationChange = {() => {
-						this.getUserLatLong()
-					}}
-			>
-				{
-				this.state.places.map((e, i) => {
-					return <Marker
-						key = { i }
-						coordinate = {{ 
-							latitude: e.coordinates.latitude,
-							longitude: e.coordinates.longitude
-						}}
-						>
-						<Callout
-            						onPress={()=>{
-              							this.props.navigation.navigate('Details',{id:e.id})}
-							}
-						>
-							<View>
-								<Text>{e.name}</Text>
-							</View>
-						</Callout>
-						</Marker>})
-				}
-			</MapView>
+			{ !this.state.userlatlong.latitude ?
+				<>
+				</>
+				:
+				<>
+					<MapView
+							style = {{ flex: 1 }}
+							initialRegion = {{
+								latitude: this.state.userlatlong.latitude,
+								longitude: this.state.userlatlong.longitude,
+								latitudeDelta: 0.0922,
+								longitudeDelta: 0.0421,
+							}}
+							provider = { MapView.PROVIDER_GOOGLE }
+							customMapStyle = { generatedMapStyle }
+							minZoomLevel = { 14.5 }
+							maxZoomLevel = { 20 }
+							showsUserLocation = { true }
+							showsMyLocationButton = { true }
+							onUserLocationChange = {() => {
+								this.getUserLatLong()
+							}}
+					>
+						{
+						this.state.places.map((e, i) => {
+							return e.is_closed ?
+								<View key={i}>
+								</View>
+								:
+								<View key={i}>
+									<Marker
+									coordinate = {{ 
+										latitude: e.coordinates.latitude,
+										longitude: e.coordinates.longitude
+									}}
+									>
+									<Callout
+										onPress={()=>{
+              										this.props.navigation.navigate('Details',{data: e})}
+										}}
+									>
+										<View>
+											<Text>{e.name}</Text>
+											<Text>{e.location.address1}</Text>
+											<Text>{e.price}</Text>
+											<Image source = {{ uri: e.image_url }} style = {{ width: 150, height: 150 }} />
+										</View>
+									</Callout>
+									</Marker>
+								</View>})
+						}
+						{
+						this.state.events.map((e, i) => {
+							return <Marker
+								key = { i }
+								coordinate = {{ 
+									latitude: parseFloat(e.lat),
+									longitude: parseFloat(e.long)
+								}}
+								pinColor = '#FFFF00'
+								>
+								<Callout
+									onPress={()=>{
+              									this.props.navigation.navigate('Details',{data: e})}
+									}}
+								>
+									<View>
+										<Text>{e.name_}</Text>
+										<Text>Time: {new Date(e.starts).getHours()}:00 - {new Date(e.ends).getHours()}:00</Text>
+										<Text>{e.price}</Text>
+										<Image source = {{ uri: e.logo }} style = {{ width: 150, height: 150 }} />
+									</View>
+								</Callout>
+								</Marker>})
+						}
+					</MapView>
+				</>
+			}
 		</>
 	}
 
@@ -72,13 +110,17 @@ export default class Map extends React.Component {
 	
 	getEvents = (latitude, longitude) => {
 		const 	min_lat = latitude - 0.00725
-			min_long = longitude - 0.00909
+			min_long = longitude - 0.00725
 			max_lat = latitude + 0.00725
-			max_long = longitude + 0.00909
+			max_long = longitude + 0.00725
 			url = `http://horizons-api.herokuapp.com/events`
 			term = `?min_lat=${min_lat}&max_lat=${max_lat}&min_long=${min_long}&max_long=${max_long}`
 		axios.get(`${url}${term}`)
-		.then(res=>console.log(JSON.stringify(res)))
+		.then(res=> {
+			const { data } = res.data
+			this.setState({ events: data })
+		
+		})
 		.catch(_ => _)
 	}
 
@@ -101,7 +143,7 @@ export default class Map extends React.Component {
 			const 	{latitude, longitude} = location.coords
 				lat = this.state.userlatlong.latitude
 				long = this.state.userlatlong.longitude
-			if(lat <= (latitude - (.00725/2)) || lat >= (latitude + (.00725/2) ) || long <= (longitude - (.00909/2)) || long >= (longitude + (.00909/2))) {
+			if(lat <= (latitude - (.00725/2)) || lat >= (latitude + (.00725/2) ) || long <= (longitude - (.00725/2)) || long >= (longitude + (.00725/2))) {
 				this.setState({userlatlong: {latitude, longitude}})
 				this.getPlaces(latitude, longitude)
 				this.getEvents(latitude, longitude)
