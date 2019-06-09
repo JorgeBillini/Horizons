@@ -1,8 +1,14 @@
 {
   "expoServerPort": null,
+<<<<<<< HEAD
   "expoServerNgrokUrl": "https://e8-rpi.anonymous.horizons-frontend.exp.direct",
   "packagerNgrokUrl": "https://packager.e8-rpi.anonymous.horizons-frontend.exp.direct",
   "ngrokPid": 18016,
+=======
+  "expoServerNgrokUrl": "https://gc-pv8.anonymous.horizons-frontend.exp.direct",
+  "packagerNgrokUrl": "https://packager.gc-pv8.anonymous.horizons-frontend.exp.direct",
+  "ngrokPid": 11101,
+>>>>>>> master
   "devToolsPort": 19002,
   "packagerPort": null,
   "packagerPid": null

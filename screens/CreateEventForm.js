@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import {Icon} from 'native-base';
 export default class eventForm extends React.Component {
     constructor(props){
         super(props);
