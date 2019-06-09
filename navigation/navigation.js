@@ -1,4 +1,4 @@
-import Map from '../screens/Map.js';
+import eventForm from '../screens/CreateEventForm';
 import { Ionicons } from '@expo/vector-icons';
 import UserProfile from '../screens/userProfile';
 import EventContainer from './listViewScreens';
@@ -8,7 +8,7 @@ import React from 'react';
 // create navigation stack for main nav
 export default  RootStack = createBottomTabNavigator({
     Home: {
-      screen: MapContainer
+      screen: eventForm
     },
     List: {
       screen: EventContainer,
