@@ -22,7 +22,7 @@ export default class SignUp extends Component {
         .then(res =>{
             console.log('created user in firebase...', res);
             if(res.user){
-                const user = {username, email, xp: 0}
+                const user = {username, email}
 
         // post user to db
                 return Axios.post(`http://horizons-api.herokuapp.com/users/`, user);

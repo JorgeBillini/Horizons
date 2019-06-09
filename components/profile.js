@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, KeyboardAvoidingView, Text, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, Image} from 'react-native';
+import {Text} from 'react-native-elements';
 import {AuthContext} from '../contexts/auth';
 import firebase from '../firebase';
 import genericUserPic from '../assets/user.png';
@@ -15,11 +16,11 @@ export default class Profile extends Component{
                             
                             <View style={styles.profileContainer}>
                                 <Image source={profilePic} style={styles.profileImg}/>
-                                <Text style={styles.username}> {user.username} </Text>
+                                <Text h4 style={styles.username}> {user.username} </Text>
                                 <Text style={styles.email}> {user.email} </Text>
                             </View>
                             
-                            <View>
+                            {/* <View>
                                 <Text>badges...</Text>
                             </View>
 
@@ -28,11 +29,17 @@ export default class Profile extends Component{
                             </View>
 
                             <View>
-                                <Text>Events Created For Today</Text>
+                                <Text>Interests</Text>
+                            </View> */}
+
+                            <View style={styles.currEventsContainer}>
+                                <Text h4 style={styles.title}>Events Created For Today</Text>
+
                             </View>
 
-                            <View>
-                                <Text>Past Created Events</Text>
+                            <View style={styles.pastEventsContainer}>
+                                <Text h4 style={styles.title}>Past Created Events</Text>
+
                             </View>
 
 
@@ -67,11 +74,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     username: {
-        textAlign: 'center',
-        fontWeight: '700',
-        fontSize: 20,
         marginTop: 10,
         color: 'green',
+        textAlign: 'center'
     },
     email: {
         textAlign: 'center',
@@ -81,12 +86,23 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         borderColor: 'grey',
         borderWidth: 1,
-        borderRadius: 10
+        borderRadius: 10,
+        marginTop: 15
     },
     logoutText: {
         color: 'white',
         textAlign: 'center',
         fontWeight: '700',
         fontSize: 16
+    },
+    currEventsContainer: {
+        marginTop: 15,
+    },
+    title: {
+        textAlign: 'center',
+        color: '#3582DB',
+    },
+    pastEventsContainer: {
+        marginTop: 15,
     }
 });
