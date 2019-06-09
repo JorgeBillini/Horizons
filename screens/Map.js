@@ -61,7 +61,7 @@ export default class Map extends React.Component {
 									>
 									<Callout
 										onPress={()=>{
-											console.log(JSON.stringify(e))
+              										this.props.navigation.navigate('Details',{data: e})}
 										}}
 									>
 										<View>
@@ -86,7 +86,11 @@ export default class Map extends React.Component {
 								>
 								<Callout
 									onPress={()=>{
+<<<<<<< HEAD
 										console.log(JSON.stringify(new Date(e.starts).getHours()))
+=======
+              									this.props.navigation.navigate('Details',{data: e})}
+>>>>>>> master
 									}}
 								>
 									<View>
