@@ -10,7 +10,6 @@ import {Dimensions} from 'react-native';
 export default props =>{
     const height = Dimensions.get('window').height;
     const width = Dimensions.get('window').width;
-    console.log(props.data, "is data");
     return(
     <>
         <View style={{backgroundColor:'white',height:height,flex:1}}>
@@ -30,7 +29,7 @@ export default props =>{
             </View>
             <View>
                 <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>{props.data.price}</Text>
-                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>{props.data.categories ? props.data.categories[0].title : props.data.starts}</Text>
+                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
 
             </View>
             <View style={{padding:10,flex:1}}>
@@ -39,19 +38,19 @@ export default props =>{
 
             }
 
-                <Text >
+                {/* <Text >
                   {props.data.location.display_address[0]}
                 </Text>
                 <Text >
                   {props.data.location.display_address[1]}
-                </Text>
+                </Text> */}
             </View>
             <Button 
             dark block onPress={()=>{
                 const data = {
                     destination:{
-                        latitude:props.data.coordinates.latitude || props.data.lat,
-                        longitude: props.data.coordinates.longitude || props.data.long
+                        latitude: props.data.coordinates ? props.data.coordinates.latitude : props.data.lat,
+                        longitude: props.data.coordinates ? props.data.coordinates.longitude : props.data.long
                     },
                     params:[{
                         key:'travelmode',
