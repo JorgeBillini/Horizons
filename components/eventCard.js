@@ -14,7 +14,6 @@ const phHeight = Math.floor(phWidth/2)
 
 export default class EventCard extends Component {
   render() {
-    console.log(this.props.categories,'      ', typeof(categories))
     return (
       <>
       <Content >
@@ -22,18 +21,18 @@ export default class EventCard extends Component {
             <CardItem>
               <Image
               style={{width: phWidth, height: phHeight}}
-              source={{uri: `${this.props.image}`}} />
+              source={{uri: `${this.props.data.image_url}`}} />
             </CardItem>
             <CardItem style={noPad}>
               <Left>
                 <Text style={h1}>
-                  {this.props.name || this.props.event_name}
+                  {this.props.data.name || this.props.event_name}
                 </Text>
               </Left>
               <Right>
-                <Badge style={padR} primary>
-                  <Text>
-                    {this.props.price}
+                <Badge style={padR} style={{backgroundColor:'black'}}>
+                  <Text style={{color:'white'}}>
+                    {this.props.data.price}
                   </Text>
                 </Badge>
               </Right>
@@ -41,23 +40,20 @@ export default class EventCard extends Component {
             <CardItem style={noPad}>
               <Body style={{...padL, ...row}}>
                 <Text style={padRs}>
-                  []
+                  {this.props.data.location.display_address[0]}
                 </Text>
                 <Text style={padRs}>
-                  [ 2 ]
-                </Text>
-                <Text>
-                  [ 3 ]
+                  - {this.props.data.location.display_address[1] }
                 </Text>
               </Body>
             </CardItem>
             <CardItem>
               <Body style={{...padL}}>
                 <Text>
-                  {this.props.address}
+                  {this.props.data.location ? this.props.data.location.adress1 : ''}
                 </Text>
                 <Text>
-                  Event Hours
+                  {this.props.data.is_closed === true ? 'Closed':'Open'}
                 </Text>
               </Body>
             </CardItem>
@@ -65,9 +61,9 @@ export default class EventCard extends Component {
               <Body style={padL}>
                 <Button
                 title="See more details"
-                style={selfCenter}
+                color='black'
                 onPress={()=>{
-                  this.props.navigate('Details',{id:this.props.id})}}
+                  this.props.navigate('Details',{data:this.props.data})}}
                 >
                   </Button>
               </Body>
