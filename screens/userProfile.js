@@ -52,7 +52,7 @@ export default class UserProfile extends React.Component{
         if (isLoggedIn){
             return (
                 <AuthContext.Provider value={isLoggedIn}>
-                    <Profile />
+                    <Profile user={isLoggedIn}/>
                 </AuthContext.Provider>
             )
         } else {
