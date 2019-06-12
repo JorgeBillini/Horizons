@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, Image} from 'react-native';
-import {Text, ListItem} from 'react-native-elements';
+import {StyleSheet, View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Image} from 'react-native';
+import {Text, ListItem, Icon} from 'react-native-elements';
 import Axios from 'axios';
-import {AuthContext} from '../contexts/auth';
 import firebase from '../firebase';
 import genericUserPic from '../assets/user.png';
 
@@ -15,16 +14,16 @@ export default class Profile extends Component{
 
     componentDidMount(){
         const user = this.props.user;
-        // console.log('inside component did mount...user is', user);
-        // const p1 = Axios.get(`http://horizons-api.herokuapp.com/events/${user.id}`);
-        // const p2 = Axios.get(`http://horizons-api.herokuapp.com/events/past/${user.id}`);
 
-        const p1 = Axios.get(`http://localhost:5001/events/${user.id}`);
-        const p2 = Axios.get(`http://localhost:5001/events/past/${user.id}`);
+        const p1 = Axios.get(`http://horizons-api.herokuapp.com/events/${user.id}`);
+        const p2 = Axios.get(`http://horizons-api.herokuapp.com/events/past/${user.id}`);
+
+        // const p1 = Axios.get(`http://localhost:5001/events/${user.id}`);
+        // const p2 = Axios.get(`http://localhost:5001/events/past/${user.id}`);
 
         Promise.all([p1, p2])
-            .then(([currEvents, pastEvents]) =>{
-                this.setState( {user, currEvents, pastEvents} );
+            .then(([res1, res2]) =>{
+                this.setState( {user, currEvents: res1.data.data, pastEvents: res2.data.data});
             })
             .catch(err =>{
                 console.log('get user created events error...', err);
@@ -34,8 +33,12 @@ export default class Profile extends Component{
     render (){
         const {user, currEvents, pastEvents} = this.state;
         const profilePic = user.pic ? user.pic : genericUserPic;
-        console.log(user)
+        console.log('in render, user is...', user)
+        console.log('in render, currEvents is...', currEvents)
+        console.log('in render, pastEvents is...', pastEvents)
+
         return (
+            <ScrollView>
             <KeyboardAvoidingView style={styles.container}>
                 
                 <View style={styles.profileContainer}>
@@ -45,7 +48,7 @@ export default class Profile extends Component{
                 </View>
 
                 <View style={styles.currEventsContainer}>
-                    <Text h5 style={styles.title}>Events Created For Today</Text>
+                    <Text style={styles.title}>Events Created For Today</Text>
                     <View>
                         {currEvents.length? 
                             currEvents.map( (l, i) =>(
@@ -53,7 +56,7 @@ export default class Profile extends Component{
                                 key={i}
                                 leftAvatar={{ source: { uri: l.logo } }}
                                 title={l.name_}
-                                subtitle={l.starts}
+                                subtitle={l.starts + l.venue}
                                 />
                             ))
                             :
@@ -63,21 +66,21 @@ export default class Profile extends Component{
                 </View>
 
                 <View style={styles.pastEventsContainer}>
-                    <Text h5 style={styles.title}>Past Created Events</Text>
-                    <View>
+                    <Text style={styles.title}>Past Created Events</Text>
+                    <ScrollView style={styles.pastEventsList}>
                         {pastEvents.length?
                             pastEvents.map( (l, i) =>(
                                 <ListItem
-                                key={i}
-                                leftAvatar={{ source: { uri: l.logo } }}
-                                title={l.name_}
-                                subtitle={l.venue}
+                                    key={i}
+                                    leftAvatar={{ source: { uri: l.logo } }}
+                                    title={l.name_}
+                                    subtitle={`${l.venue} - ${l.starts.split('T').join(' ').slice(0,-8)}`}
                                 />
                             ))
                             :
                             <Text style={styles.noEventText}>No events created yet</Text>
                         }
-                    </View>
+                    </ScrollView>
                 </View>
 
 
@@ -92,6 +95,7 @@ export default class Profile extends Component{
                 </TouchableOpacity>
 
             </KeyboardAvoidingView>
+            </ScrollView>
         );
     }
 
@@ -143,11 +147,15 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         paddingVertical: 10,
         fontWeight: '700',
+        fontSize: 20,
     },
     pastEventsContainer: {
         paddingBottom: 20,
     },
     noEventText: {
         textAlign: 'center'
+    },
+    pastEventsList: {
+
     }
 });
