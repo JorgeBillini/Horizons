@@ -35,7 +35,7 @@ export default class Login extends Component {
 
                     <TextInput
                         placeholder='email'
-                        placeholderTextColor='rgba(255,255,255,0.7)'
+                        placeholderTextColor='grey'
                         style={styles.input}
                         returnKeyType='next'
                         onSubmitEditing={ () => this.pwInput.focus() }
@@ -48,7 +48,7 @@ export default class Login extends Component {
                     <TextInput
                         placeholder='password'
                         secureTextEntry
-                        placeholderTextColor='rgba(255,255,255,0.7)'
+                        placeholderTextColor='grey'
                         style={styles.input}
                         returnKeyType='go'
                         ref={input => this.pwInput = input}
@@ -99,28 +99,32 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'lightblue',
         justifyContent: 'center'
     },
     greeting: {
-        color: '#3582DB',
         textAlign: 'center',
         fontWeight: '700',
         fontSize: 20,
-        marginBottom: 15
+        marginBottom: 15,
     },
     formContainer: {
         padding: 20
     },
     input: {
-        backgroundColor: 'rgba(255,255,255,0.5)',
         height: 40,
         marginBottom: 20,
         paddingHorizontal: 20,
-        borderRadius: 20
+        borderRadius: 20,
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+        shadowOffset: {
+        height: 0,
+        width: 0,
+        },
+        elevation: 3,
     },
     buttonContainer: {
-        backgroundColor: '#3582DB',
+        backgroundColor: 'black',
         paddingVertical: 15,
         borderRadius: 20
     },
