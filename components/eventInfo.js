@@ -1,37 +1,68 @@
 import React from 'react';
-import {Button,Header,Divider} from 'react-native-elements';
+import {Header,Divider} from 'react-native-elements';
+import {Button} from 'native-base';
 import {View,ScrollView,Image,Text} from 'react-native';
+import StarRating from 'react-native-star-rating';
+import getDirections from 'react-native-google-maps-directions';
+
 import {Dimensions} from 'react-native';
 
 export default props =>{
     const height = Dimensions.get('window').height;
     const width = Dimensions.get('window').width;
-    console.log(props.id);
     return(
     <>
-        <View style={{backgroundColor:'white',height:height}}>
+        <View style={{backgroundColor:'white',height:height,flex:1}}>
         <Header
             centerComponent={{ text: "", style:{color:'black' ,fontSize:25} }}
             backgroundColor={'white'}
             />
             <View style={{backgroundColor:'white'}}>
             <View style={{justifyContent:'center',alignItems:'center'}}>
-          <Image source={{uri: 'https://facebook.github.io/react/logo-og.png'}}
+          <Image source={{uri: props.data.image_url || props.data.logo}}
             style={{width:width, height:height/3}} />
             </View>
             <Divider style={{backgroundColor:'black'}}/>
             <ScrollView>
             <View>
-                <Text style={{textAlign:'left',fontSize:30,color:'black', padding:8}}>Name</Text>
+                <Text style={{textAlign:'left',fontSize:30,color:'black', padding:8}}>{props.data.name || props.data.name_}</Text>
             </View>
             <View>
-                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>Free</Text>
+                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>{props.data.price}</Text>
+                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
+
             </View>
-            <View style={{padding:10}}>
-                <Text style={{color:'black'}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
-                <Text style={{color:"black"}}>{props.id} is id</Text>
+            <View style={{padding:10,flex:1}}>
+            {
+                props.data.rating ? <StarRating disabled={true} maxStars={5} halfStarEnabled={true} rating={props.data.rating} fullStarColor="black" /> : <Text style={{color:'white'}}>{props.data.description}</Text>
+
+            }
+
+                {/* <Text >
+                  {props.data.location.display_address[0]}
+                </Text>
+                <Text >
+                  {props.data.location.display_address[1]}
+                </Text> */}
             </View>
-            <Button title="Go Here"></Button>
+            <Button 
+            dark block onPress={()=>{
+                const data = {
+                    destination:{
+                        latitude: props.data.coordinates ? props.data.coordinates.latitude : props.data.lat,
+                        longitude: props.data.coordinates ? props.data.coordinates.longitude : props.data.long
+                    },
+                    params:[{
+                        key:'travelmode',
+                        value:'walking'
+
+                    },{
+                        key:'dir_action',
+                        value:'navigate'
+                    }
+                    ]
+                }
+                getDirections(data)}}><Text style={{color:'white'}}>Go Here</Text></Button>
            
                 </ScrollView>
 
