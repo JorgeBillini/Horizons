@@ -76,14 +76,28 @@ export default class Profile extends Component{
                     <Text style={styles.title}>Past Created Events</Text>
                     <ScrollView style={styles.pastEventsList}>
                         {pastEvents.length?
-                            pastEvents.map( (l, i) =>(
-                                <ListItem
-                                    key={i}
-                                    leftAvatar={{ source: { uri: l.logo }, color: 'green'}}
-                                    title={l.name_}
-                                    subtitle={`${l.venue} ★ ${l.starts.split('T').join(' ').slice(0,-8)}`}
-                                />
-                            ))
+                            pastEvents.map( (l, i) =>{
+
+                                // Just converting time string to look how I want --------------->
+                                const primitiveTime = l.starts.split('T').join(' ').slice(0,-8);
+                                let time = primitiveTime.slice(-5,-3);
+                                if(parseInt(time) > 12){
+                                    time = (parseInt(time)-12).toString() + primitiveTime.slice(-3) + 'PM'
+                                } else {
+                                    time = time + primitiveTime.slice(-3) + 'AM';
+                                }
+                                const nicerDateTime = primitiveTime.slice(0,11) + time;
+                                // <--------------------------------------------------------------
+                                
+                                return (
+                                    <ListItem
+                                        key={i}
+                                        leftAvatar={{ source: { uri: l.logo }, color: 'green'}}
+                                        title={l.name_}
+                                        subtitle={`${l.venue} ★ ${nicerDateTime}`}
+                                    />
+                                )
+                            })
                             :
                             <Text style={{textAlign: 'center', paddingVertical: 15, fontSize: 14, color:'grey'}}>
                                 No events created yet
