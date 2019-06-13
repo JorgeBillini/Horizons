@@ -48,11 +48,12 @@ export default class UserProfile extends React.Component{
 
     render(){
         const {isLoggedIn, signUpView} = this.state;
+        const {navigate} = this.props.navigation;
 
         if (isLoggedIn){
             return (
                 <AuthContext.Provider value={isLoggedIn}>
-                    <Profile />
+                    <Profile user={isLoggedIn} navigate={navigate}/>
                 </AuthContext.Provider>
             )
         } else {
