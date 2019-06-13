@@ -54,13 +54,20 @@ export default class Profile extends Component{
                             currEvents.map( (l, i) =>(
                                 <ListItem
                                 key={i}
-                                leftAvatar={{ source: { uri: l.logo } }}
+                                leftAvatar={{ source: { uri: l.logo }, color:'green' }}
                                 title={l.name_}
                                 subtitle={l.starts + l.venue}
                                 />
                             ))
                             :
-                            <Text style={styles.noEventText}>Create an event!</Text>
+                            <View style={{paddingVertical:15, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <Icon name='add-circle' onPress={() => console.log('create event!')} />
+                                <Text style={{textAlign:'center', fontSize:14, color:'grey'}}
+                                    onPress={() => console.log('create event!')}
+                                    >
+                                    &nbsp;Create an event!
+                                </Text>
+                            </View>
                         }
                     </View>
                 </View>
@@ -72,13 +79,15 @@ export default class Profile extends Component{
                             pastEvents.map( (l, i) =>(
                                 <ListItem
                                     key={i}
-                                    leftAvatar={{ source: { uri: l.logo } }}
+                                    leftAvatar={{ source: { uri: l.logo }, color: 'green'}}
                                     title={l.name_}
-                                    subtitle={`${l.venue} - ${l.starts.split('T').join(' ').slice(0,-8)}`}
+                                    subtitle={`${l.venue} ★ ${l.starts.split('T').join(' ').slice(0,-8)}`}
                                 />
                             ))
                             :
-                            <Text style={styles.noEventText}>No events created yet</Text>
+                            <Text style={{textAlign: 'center', paddingVertical: 15, fontSize: 14, color:'grey'}}>
+                                No events created yet
+                            </Text>
                         }
                     </ScrollView>
                 </View>
@@ -103,7 +112,8 @@ export default class Profile extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        
+        paddingHorizontal: 10,
+        paddingVertical: 15
     },
     profileContainer: {
         marginTop: 25,
@@ -113,6 +123,9 @@ const styles = StyleSheet.create({
         width: 125,
         height: 125,
         alignSelf: 'center',
+        borderWidth: 1,
+        borderRadius: 100,
+        borderColor: 'white',
     },
     username: {
         marginTop: 10,
@@ -151,9 +164,6 @@ const styles = StyleSheet.create({
     },
     pastEventsContainer: {
         paddingBottom: 20,
-    },
-    noEventText: {
-        textAlign: 'center'
     },
     pastEventsList: {
 
