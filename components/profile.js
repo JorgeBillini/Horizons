@@ -41,12 +41,14 @@ export default class Profile extends Component{
             <ScrollView>
             <KeyboardAvoidingView style={styles.container}>
                 
+                {/* Profile Section */}
                 <View style={styles.profileContainer}>
                     <Image source={profilePic} style={styles.profileImg}/>
                     <Text h3 style={styles.username}> {user.username} </Text>
                     <Text style={styles.email}> {user.email} </Text>
                 </View>
 
+                {/* Current Events Section */}
                 <View style={styles.currEventsContainer}>
                     <Text style={styles.title}>Events Created For Today</Text>
                     <View>
@@ -71,10 +73,11 @@ export default class Profile extends Component{
                         }
                     </View>
                 </View>
-
+                
+                {/* Past Events Section */}
                 <View style={styles.pastEventsContainer}>
                     <Text style={styles.title}>Past Created Events</Text>
-                    <ScrollView style={styles.pastEventsList}>
+                    <View style={styles.pastEventsList}>
                         {pastEvents.length?
                             pastEvents.map( (l, i) =>{
 
@@ -88,7 +91,7 @@ export default class Profile extends Component{
                                 }
                                 const nicerDateTime = primitiveTime.slice(0,11) + time;
                                 // <--------------------------------------------------------------
-                                
+
                                 return (
                                     <ListItem
                                         key={i}
@@ -103,7 +106,7 @@ export default class Profile extends Component{
                                 No events created yet
                             </Text>
                         }
-                    </ScrollView>
+                    </View>
                 </View>
 
 
@@ -180,6 +183,6 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     pastEventsList: {
-
+        
     }
 });
