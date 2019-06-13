@@ -72,15 +72,18 @@ export default class Profile extends Component{
                                 )
                             })
                             :
-                            <View style={{paddingVertical:15, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                                <Icon name='add-circle' onPress={() => console.log('create event!')} />
-                                <Text style={{textAlign:'center', fontSize:14, color:'grey'}}
-                                    onPress={() => console.log('create event!')}
-                                    >
-                                    &nbsp;Create an event!
-                                </Text>
-                            </View>
+                            <></>
                         }
+
+                        <View style={{paddingVertical:15, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                            <Icon name='add-circle' onPress={ () => this.props.navigate('EventForm', {data: user}) } />
+                            <Text style={{textAlign:'center', fontSize:14, color:'grey'}}
+                                onPress={ () => this.props.navigate('EventForm', {data: user}) }
+                                >
+                                &nbsp;Create an event!
+                            </Text>
+                        </View>
+                        
                     </View>
                 </View>
                 
