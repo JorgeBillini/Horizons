@@ -13,13 +13,10 @@ export default class Profile extends Component{
     }
 
     componentDidMount(){
-        const user = this.props.user;
+        const {user} = this.props;
 
         const p1 = Axios.get(`http://horizons-api.herokuapp.com/events/${user.id}`);
         const p2 = Axios.get(`http://horizons-api.herokuapp.com/events/past/${user.id}`);
-
-        // const p1 = Axios.get(`http://localhost:5001/events/${user.id}`);
-        // const p2 = Axios.get(`http://localhost:5001/events/past/${user.id}`);
 
         Promise.all([p1, p2])
             .then(([res1, res2]) =>{
@@ -30,12 +27,20 @@ export default class Profile extends Component{
             })
     }
 
+    UtcToNicerTime = (utc) =>{
+        const primitiveTime = utc.split('T').join(' ').slice(0,-8);
+        let time = primitiveTime.slice(-5,-3);
+        if(parseInt(time) > 12){
+            time = (parseInt(time)-12).toString() + primitiveTime.slice(-3) + 'PM'
+        } else {
+            time = time + primitiveTime.slice(-3) + 'AM';
+        }
+        return primitiveTime.slice(0,11) + time;
+    }
+
     render (){
         const {user, currEvents, pastEvents} = this.state;
         const profilePic = user.pic ? user.pic : genericUserPic;
-        console.log('in render, user is...', user)
-        console.log('in render, currEvents is...', currEvents)
-        console.log('in render, pastEvents is...', pastEvents)
 
         return (
             <ScrollView>
@@ -53,14 +58,19 @@ export default class Profile extends Component{
                     <Text style={styles.title}>Events Created For Today</Text>
                     <View>
                         {currEvents.length? 
-                            currEvents.map( (l, i) =>(
-                                <ListItem
-                                key={i}
-                                leftAvatar={{ source: { uri: l.logo }, color:'green' }}
-                                title={l.name_}
-                                subtitle={l.starts + l.venue}
-                                />
-                            ))
+                            currEvents.map( (l, i) =>{
+                                const nicerDateTime = this.UtcToNicerTime(l.starts);
+                                const venue = JSON.parse(l.venue).name;
+
+                                return (
+                                    <ListItem
+                                        key={i}
+                                        leftAvatar={{ source: { uri: l.logo } }}
+                                        title={l.name_}
+                                        subtitle={`${nicerDateTime} ★ ${venue}`}
+                                    />
+                                )
+                            })
                             :
                             <View style={{paddingVertical:15, flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                                 <Icon name='add-circle' onPress={() => console.log('create event!')} />
@@ -80,24 +90,15 @@ export default class Profile extends Component{
                     <View style={styles.pastEventsList}>
                         {pastEvents.length?
                             pastEvents.map( (l, i) =>{
-
-                                // Just converting time string to look how I want --------------->
-                                const primitiveTime = l.starts.split('T').join(' ').slice(0,-8);
-                                let time = primitiveTime.slice(-5,-3);
-                                if(parseInt(time) > 12){
-                                    time = (parseInt(time)-12).toString() + primitiveTime.slice(-3) + 'PM'
-                                } else {
-                                    time = time + primitiveTime.slice(-3) + 'AM';
-                                }
-                                const nicerDateTime = primitiveTime.slice(0,11) + time;
-                                // <--------------------------------------------------------------
+                                const nicerDateTime = this.UtcToNicerTime(l.starts);
+                                const venue = JSON.parse(l.venue).name;
 
                                 return (
                                     <ListItem
                                         key={i}
-                                        leftAvatar={{ source: { uri: l.logo }, color: 'green'}}
+                                        leftAvatar={{ source: { uri: l.logo } }}
                                         title={l.name_}
-                                        subtitle={`${l.venue} ★ ${nicerDateTime}`}
+                                        subtitle={`${nicerDateTime} ★ ${venue}`}
                                     />
                                 )
                             })
