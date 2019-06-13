@@ -86,7 +86,6 @@ export default class Map extends React.Component {
 								>
 								<Callout
 									onPress={()=>{
-
               									this.props.navigation.navigate('Details',{data: e})}
 									}
 								>
