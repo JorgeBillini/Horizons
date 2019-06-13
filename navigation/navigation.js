@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import UserProfile from '../screens/userProfile';
 import EventContainer from './listViewScreens';
 import MapContainer from './MaptoDetails';
+import ProfileContainer from './profile';
 import {createBottomTabNavigator,} from 'react-navigation';
 import React from 'react';
 // create navigation stack for main nav
@@ -16,7 +17,8 @@ export default  RootStack = createBottomTabNavigator({
       path:'/event'
     },
     Profile: {
-      screen: UserProfile
+      screen: ProfileContainer,
+      path: '/profile'
     },
   },
   {
