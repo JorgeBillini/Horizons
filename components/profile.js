@@ -56,7 +56,7 @@ export default class Profile extends Component{
                 {/* Current Events Section */}
                 <View style={styles.currEventsContainer}>
                     <Text style={styles.title}>Events Created For Today</Text>
-                    <View>
+                    <View style={{borderWidth:1,borderColor:'grey',borderTopWidth:0}}>
                         {currEvents.length? 
                             currEvents.map( (l, i) =>{
                                 const nicerDateTime = this.UtcToNicerTime(l.starts);
@@ -90,7 +90,7 @@ export default class Profile extends Component{
                 {/* Past Events Section */}
                 <View style={styles.pastEventsContainer}>
                     <Text style={styles.title}>Past Created Events</Text>
-                    <View style={styles.pastEventsList}>
+                    <View style={{borderWidth:1,borderColor:'grey',borderTopWidth:0}}>
                         {pastEvents.length?
                             pastEvents.map( (l, i) =>{
                                 const nicerDateTime = this.UtcToNicerTime(l.starts);
