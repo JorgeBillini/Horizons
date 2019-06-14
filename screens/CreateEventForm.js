@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import {Icon} from 'native-base';
+import Axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default class eventForm extends React.Component {
@@ -32,18 +33,60 @@ export default class eventForm extends React.Component {
             startDate, startTime, endDate, endTime, error
         } = this.state;
 
+        const user_id = parseInt(this.props.navigation.state.params.data.user_id);
+        const venue = {name: venueName, age_restriction: ageRestrict, address: venueAddr};
+
         // Conditionals to ensure grabbing right data
         if (!evName || !evDesc || !evPrice){
             this.setState({error: 'Event name, description, and price must be filled out.'})
         } else if (!venueName || !venueAddr){
             this.setState({error: 'Venue name and address must be filled out.'})
         } else if (!startDate || !startTime || !endDate || !endTime){
+            this.setState({error: 'Please enter a number for venue capacity.'})
+        } else if (capacity && typeof parseInt(capacity) !== 'number'){
             this.setState({error: 'All Date & Time fields must be filled out.'})
         } else {
-            this.setState({error: 'all fields filled out yay'})
-        }
+            // figure out lat long based on address input...
+            const lat = null;
+            const long = null;
 
-        // this.props.navigation.navigate('userProfile');
+            // Make event object for db
+            const event = {
+                user_id, 
+                name_: evName, 
+                description_: evDesc, 
+                category: evCategory, 
+                url_: evUrl, 
+                starts: `${startDate} ${startTime}`, 
+                ends: `${endDate} ${endTime}`, 
+                price: evPrice, 
+                logo: evLogo, 
+                venue: JSON.stringify(venue), 
+                lat, 
+                long, 
+                capacity
+            }
+
+            // Create user-event in db
+            const config = {
+                method: 'POST',
+                url: `http://horizons-api.herokuapp.com/events/`,
+                data: event,
+            }
+            
+            Axios(config)
+                .then(res =>{
+                    console.log('event successfully posted...yay!!! ', res.data)
+                    return {success: true}
+                })
+                .then(yay =>{
+                    console.log(yay);
+                    this.props.navigation.navigate('userProfile');
+                })
+                .catch(err =>{
+                    console.log('event failed to post... oh no!!! ', err.toString())
+                })
+        }
     }
 
     render(){
@@ -158,7 +201,7 @@ export default class eventForm extends React.Component {
 
                     {/* Submit button */}
                     <TouchableOpacity 
-                        style={{backgroundColor:'black',marginHorizontal:50,marginTop:20,borderRadius:20,padding:15}}
+                        style={{backgroundColor:'black',marginHorizontal:35,marginTop:20,borderRadius:20,padding:15}}
                         onPress={() => this.submitEvent()}
                     >
                         <Text style={{color:'white',fontWeight:'700',fontSize:16,textAlign:'center'}}>
