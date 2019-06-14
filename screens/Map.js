@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, Button, Modal, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, Image, Button, TouchableHighlight } from 'react-native';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import axios from 'axios';
 
@@ -64,7 +64,7 @@ export default class Map extends React.Component {
               										this.props.navigation.navigate('Details',{data: e})}
 										}
 									>
-										<View>
+										<View style = {{ width: 200 }}>
 											<Text>{e.name}</Text>
 											<Text>{e.location.address1}</Text>
 											<Text>{e.price}</Text>
@@ -94,7 +94,7 @@ export default class Map extends React.Component {
               									this.props.navigation.navigate('Details',{data: e})}
 									}
 								>
-									<View>
+									<View style = {{ width: 200 }}>
 										<Text>{e.name_}</Text>
 										<Text>Time: {new Date(e.starts).getHours()}:00 - {new Date(e.ends).getHours()}:00</Text>
 										<Text>{e.price}</Text>
@@ -176,7 +176,6 @@ export default class Map extends React.Component {
 		let activityData = {}
 		!randNum ? activityData = this.state.events[Math.floor(Math.random() * Math.floor(this.state.events.length))]
 		: activityData = this.state.places[Math.floor(Math.random() * Math.floor(this.state.places.length))]
-		if (activityData.image_url === '') activityData.image_url = require('./../assets/question.png')
 		this.props.navigation.navigate('Details',{data: activityData})
 	}
 
