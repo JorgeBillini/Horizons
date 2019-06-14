@@ -19,9 +19,16 @@ export default class EventCard extends Component {
       <Content >
           <Card>
             <CardItem>
+		{
+		this.props.data.image_url === '' ?
+              <Image
+              style={{width: phWidth, height: phHeight}}
+              source={require('./../assets/question.png')} />
+		:
               <Image
               style={{width: phWidth, height: phHeight}}
               source={{uri: `${this.props.data.image_url}`}} />
+		}
             </CardItem>
             <CardItem style={noPad}>
               <Left>

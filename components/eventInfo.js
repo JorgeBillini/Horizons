@@ -19,8 +19,14 @@ export default props =>{
             />
             <View style={{backgroundColor:'white'}}>
             <View style={{justifyContent:'center',alignItems:'center'}}>
+		{
+		props.data.image_url === '' ?
+          <Image source={require('./../assets/question.png')}
+            style={{width:width, height:height/3}} />
+		:
           <Image source={{uri: props.data.image_url || props.data.logo}}
             style={{width:width, height:height/3}} />
+		}
             </View>
             <Divider style={{backgroundColor:'black'}}/>
             <ScrollView>
