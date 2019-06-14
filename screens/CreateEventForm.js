@@ -2,17 +2,48 @@ import React from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import {Icon} from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
+
 export default class eventForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            data:{},
+            evName: '',
+            evCategory: '',
+            evDesc: '',
+            evPrice: '',
+            evUrl: '',
+            evLogo: '',
+            venueName: '',
+            venueAddr: '',
+            capacity: '',
+            ageRestrict: '',
+            startDate: '',
+            startTime: '',
+            endDate: '',
+            endTime: '',
+
             error: '',
         }
     }
 
     submitEvent = () =>{
-        console.log('submit pressed!');
+        const {evName, evCategory, evDesc, evPrice, evUrl, evLogo, 
+            venueName, venueAddr, capacity, ageRestrict, 
+            startDate, startTime, endDate, endTime, error
+        } = this.state;
+
+        // Conditionals to ensure grabbing right data
+        if (!evName || !evDesc || !evPrice){
+            this.setState({error: 'Event name, description, and price must be filled out.'})
+        } else if (!venueName || !venueAddr){
+            this.setState({error: 'Venue name and address must be filled out.'})
+        } else if (!startDate || !startTime || !endDate || !endTime){
+            this.setState({error: 'All Date & Time fields must be filled out.'})
+        } else {
+            this.setState({error: 'all fields filled out yay'})
+        }
+
+        // this.props.navigation.navigate('userProfile');
     }
 
     render(){
@@ -21,33 +52,113 @@ export default class eventForm extends React.Component {
         return (
             <ScrollView>
                 <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                    {/* Title */}
+                    {/* Greeting */}
+                    <View>
+                        <Text style={{textAlign:'center',fontSize:20,marginTop:20,fontWeight:'bold'}}>
+                            Hi, {this.props.navigation.state.params.data.username}!
+                        </Text>
+                    </View>
+
+                    {/* Form Title */}
                     <View>
                         <Text style={styles.title}>
                             Enter your event info below
                         </Text>
                     </View>
 
+                    {/* Input Form */}
+                    <View style={styles.formContainer}>
+                        <TextInput placeholder='Event name' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({evName: text})} />
+
+                        <TextInput placeholder='Event type or category' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({evCategory: text})}/>
+
+                        <TextInput placeholder='Event description' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({evDesc: text})}/>
+
+                        <TextInput placeholder='Event price' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({evPrice: text})}/>
+
+                        <TextInput placeholder='Event link or url' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({evUrl: text})}/>
+
+                        <TextInput placeholder='Event logo' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({evLogo: text})}/>
+                    </View>
+                    
+                    {/* Form Title */}
+                    <View>
+                        <Text style={styles.title}>
+                            Location
+                        </Text>
+                    </View>
+
+                    {/* Input Form */}
+                    <View style={styles.formContainer}>
+                        <TextInput placeholder='Venue name' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({venueName: text})}/>
+
+                        <TextInput placeholder='Venue address' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({venueAddr: text})}/>
+
+                        <TextInput placeholder='Venue capacity: # of people that fit' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({capacity: text})}/>
+
+                        <TextInput placeholder='Age restriction' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({ageRestrict: text})}/>
+                    </View>
+
+                    {/* Form Title */}
+                    <View>
+                        <Text style={styles.title}>
+                            Date & Time
+                        </Text>
+                    </View>
+
+                    {/* Input Form */}
+                    <View style={styles.formContainer}>
+                        <TextInput placeholder='Start date: YYYY-MM-DD' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({startDate: text})}/>
+
+                        <TextInput placeholder='Start time' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({startTime: text})}/>
+
+                        <TextInput placeholder='End date: YYYY-MM-DD' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({endDate: text})}/>
+
+                        <TextInput placeholder='End time' 
+                            style={styles.input} 
+                            onChangeText={(text) => this.setState({endTime: text})}/>
+                    </View>
+
                     {/* Submission error */}
                     {error ? 
-                        <Text>{error}</Text> 
+                        <View style={{borderWidth:1,borderColor:'red',paddingVertical:10,marginTop:20}}>
+                            <Text style={{color:'red',textAlign:'center',fontSize:18,paddingVertical:5}}>
+                                {error}
+                            </Text>
+                        </View>
                         : 
                         <></>
                     }
 
-                    {/* Input Form */}
-                    <View style={styles.formContainer}>
-                        <TextInput placeholder='event name' style={styles.input} />
-                        <TextInput placeholder='event description' style={styles.input} />
-                        <TextInput placeholder='venue name' style={styles.input} />
-                        <TextInput placeholder='venue address' style={styles.input} />
-                        <TextInput placeholder='start time' style={styles.input} />
-                        <TextInput placeholder='end time' style={styles.input} />
-                    </View>
-                    
                     {/* Submit button */}
                     <TouchableOpacity 
-                        style={{backgroundColor:'black',marginHorizontal:50,borderRadius:20,padding:15}}
+                        style={{backgroundColor:'black',marginHorizontal:50,marginTop:20,borderRadius:20,padding:15}}
                         onPress={() => this.submitEvent()}
                     >
                         <Text style={{color:'white',fontWeight:'700',fontSize:16,textAlign:'center'}}>
@@ -65,7 +176,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        margin: 25
+        margin: 30
     },
     title: {
         textAlign:'center',
@@ -74,17 +185,17 @@ const styles = StyleSheet.create({
         color:'white',
         backgroundColor:'black',
         paddingVertical:10,
+        marginTop:20,
     },
     formContainer:{
         borderWidth: 1,
         borderColor: 'grey',
         padding:30,
-        marginBottom: 20,
     },
     input: {
         borderBottomWidth: 2,
         height: 40,
         marginBottom: 20,
-        paddingHorizontal: 10,
+        paddingHorizontal: 5,
     },
 })

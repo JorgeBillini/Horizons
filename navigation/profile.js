@@ -13,6 +13,9 @@ const ProfileStack = createStackNavigator({
     },
     EventForm: {
         screen: EventForm,
+        navigationOptions: {
+            header: null,
+        },
     }
 })
 
