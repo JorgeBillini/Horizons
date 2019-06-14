@@ -136,7 +136,7 @@ export default class Profile extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         paddingVertical: 15
     },
     profileContainer: {
