@@ -1,5 +1,6 @@
 import Map from '../screens/Map.js';
 import eventList from '../screens/eventList';
+import createEventForm from '../screens/CreateEventForm'
 import { Ionicons } from '@expo/vector-icons';
 import UserProfile from '../screens/userProfile';
 import EventContainer from './listViewScreens';

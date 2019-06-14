@@ -1,6 +1,7 @@
 import React from 'react';
 import {Header,Divider} from 'react-native-elements';
 import {Button} from 'native-base';
+import {Linking} from 'expo'
 import {View,ScrollView,Image,Text} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import getDirections from 'react-native-google-maps-directions';
@@ -45,6 +46,7 @@ export default props =>{
                   {props.data.location.display_address[1]}
                 </Text> */}
             </View>
+            <View>
             <Button 
             dark block onPress={()=>{
                 const data = {
@@ -63,6 +65,9 @@ export default props =>{
                     ]
                 }
                 getDirections(data)}}><Text style={{color:'white'}}>Go Here</Text></Button>
+                {/* {props.data.url_ ? <><Button onPress={()=>{ Linking.openURL(props.data.url_)}}><Text>RSVP on EventBrite</Text></Button> </>: ""} */}
+            </View>
+            
            
                 </ScrollView>
 

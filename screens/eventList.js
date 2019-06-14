@@ -1,6 +1,7 @@
 import React from 'react';
 import EventCard from '../components/eventCard';
 import axios from 'axios'
+import {Text} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 import {Button} from 'react-native-elements';
 export default class EventList extends React.Component {
@@ -79,6 +80,12 @@ export default class EventList extends React.Component {
             {
                 this.state.loading === true ? <Button loading type="clear"  size={42} />:
                 this.state.places.map((e,i)=>{
+                    return <EventCard navigate={navigate} data={e} key={i}/>
+                })
+            }
+            {
+                this.state.loading === true ? <Text></Text>:
+                this.state.events.map((e,i)=>{
                     return <EventCard navigate={navigate} data={e} key={i}/>
                 })
             }

@@ -57,7 +57,8 @@ export default class Map extends React.Component {
 									coordinate = {{ 
 										latitude: e.coordinates.latitude,
 										longitude: e.coordinates.longitude
-									}}
+                  }}
+
 									>
 									<Callout
 										onPress={()=>{
@@ -121,7 +122,7 @@ export default class Map extends React.Component {
 			const { data } = res.data
 			this.setState({ events: data })
 		
-		})
+		})x
 		.catch(_ => _)
 	}
 
