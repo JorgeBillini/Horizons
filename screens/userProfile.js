@@ -20,6 +20,7 @@ export default class UserProfile extends React.Component{
         const {signUpView} = this.state;
         this.setState({signUpView: !signUpView});
     }
+    
 
     componentDidMount() {
 
@@ -40,6 +41,7 @@ export default class UserProfile extends React.Component{
           }
         })
       }
+     
     
     componentWillUnmount () {
         this.unsubscribe();
@@ -49,11 +51,12 @@ export default class UserProfile extends React.Component{
     render(){
         const {isLoggedIn, signUpView} = this.state;
         const {navigate} = this.props.navigation;
+        const isSubmitted = this.props.navigation.getParam('submitted');
 
         if (isLoggedIn){
             return (
                 <AuthContext.Provider value={isLoggedIn}>
-                    <Profile user={isLoggedIn} navigate={navigate}/>
+                    <Profile user={isLoggedIn} navigate={navigate} isSubmitted={isSubmitted}/>
                 </AuthContext.Provider>
             )
         } else {

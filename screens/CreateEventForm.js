@@ -75,7 +75,7 @@ export default class eventForm extends React.Component {
                 })
                 .then(yay =>{
                     console.log(yay);
-                    this.props.navigation.navigate('userProfile');
+                    this.props.navigation.navigate('userProfile',{submitted:true});
                 })
                 .catch(err =>{
                     console.log('event failed to post... oh no!!! ', err.toString())
