@@ -68,6 +68,9 @@ export default class Profile extends Component{
                                         leftAvatar={{ source: { uri: l.logo } }}
                                         title={l.name_}
                                         subtitle={`${nicerDateTime} ★ ${venue}`}
+                                        onPress={()=>{
+                                            this.props.navigate('Details', {data: l})
+                                        }}
                                     />
                                 )
                             })
@@ -136,7 +139,7 @@ export default class Profile extends Component{
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         paddingVertical: 15
     },
     profileContainer: {
