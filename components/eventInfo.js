@@ -10,6 +10,7 @@ import {Dimensions} from 'react-native';
 export default props =>{
     const height = Dimensions.get('window').height;
     const width = Dimensions.get('window').width;
+    const image_url = props.data.image_url || props.data.logo || ""
     return(
     <>
         <View style={{backgroundColor:'white',height:height,flex:1}}>
@@ -20,11 +21,11 @@ export default props =>{
             <View style={{backgroundColor:'white'}}>
             <View style={{justifyContent:'center',alignItems:'center'}}>
 		{
-		props.data.image_url === '' ?
+		image_url === '' ?
           <Image source={require('./../assets/question.png')}
             style={{width:width, height:height/3}} />
 		:
-          <Image source={{uri: props.data.image_url || props.data.logo}}
+          <Image source={{uri: image_url}}
             style={{width:width, height:height/3}} />
 		}
             </View>
