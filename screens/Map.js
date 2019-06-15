@@ -111,9 +111,6 @@ export default class Map extends React.Component {
 						<View style = {{ color: 'white', position: 'absolute', bottom: 0, width: '100%', color: 'white' }}>
 							<Button title = 'Random' onPress = {this.random} color = 'white'/>
 						</View>
-						<TouchableHighlight onPress = { this.createEvent }>
-							<Image source = {require('./../assets/plus.png')} style = {{ width: 50, height: 50, position: 'absolute', bottom: 80, right: 12 }}/>
-						</TouchableHighlight>
 					</>
 				</>
 			}
@@ -167,18 +164,19 @@ export default class Map extends React.Component {
 		})
 	}
 
-	createEvent = () => {
-		console.log('§±')
-	}
-
 	random = () => {
 		const randNum = Math.floor(Math.random() * Math.floor(3))
-		let activityData = {}
-		!randNum ? activityData = this.state.events[Math.floor(Math.random() * Math.floor(this.state.events.length))]
-		: activityData = this.state.places[Math.floor(Math.random() * Math.floor(this.state.places.length))]
-		this.props.navigation.navigate('Details',{data: activityData})
+    let activityData = {}
+    if (this.state.places.length && this.state.events.length) {
+		  !randNum ? activityData = this.state.events[Math.floor(Math.random() * this.state.events.length)]
+      : activityData = this.state.places[Math.floor(Math.random() * this.state.places.length)]
+      this.props.navigation.navigate('Details',{data: activityData})
+    } else if (this.state.places.length) {
+      activityData = this.state.places[Math.floor(Math.random() * this.state.places.length)]
+      this.props.navigation.navigate('Details',{data: activityData})
+    }
 	}
-
+    
 }
 
 const generatedMapStyle =
