@@ -10,6 +10,7 @@ export default class Profile extends Component{
         user: {},
         currEvents: [],
         pastEvents: [],
+        isUpdated : false,
     }
 
     componentDidMount(){
@@ -37,7 +38,24 @@ export default class Profile extends Component{
         }
         return primitiveTime.slice(0,11) + time;
     }
+    componentDidUpdate(){
+        const data= this.props.isSubmitted;
+        if (data && this.state.isUpdated === false){
+            const {user} = this.props;
 
+            const p1 = Axios.get(`http://horizons-api.herokuapp.com/events/${user.id}`);
+            const p2 = Axios.get(`http://horizons-api.herokuapp.com/events/past/${user.id}`);
+    
+            Promise.all([p1, p2])
+                .then(([res1, res2]) =>{
+                    this.setState( {user, currEvents: res1.data.data, pastEvents: res2.data.data,isUpdated:true});
+                })
+                .catch(err =>{
+                    console.log('get user created events error...', err);
+                }) 
+        }
+        else return;
+    }
     render (){
         const {user, currEvents, pastEvents} = this.state;
         const profilePic = user.pic ? user.pic : genericUserPic;
