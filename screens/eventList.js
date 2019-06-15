@@ -41,7 +41,7 @@ export default class EventList extends React.Component {
                 url = `http://horizons-api.herokuapp.com/events`
                 term = `?min_lat=${min_lat}&max_lat=${max_lat}&min_long=${min_long}&max_long=${max_long}`
             axios.get(`${url}${term}`)
-            .then(res=>this.setState({events:res.data.data},()=>console.log(this.state,'after events')))
+            .then(res=>this.setState({events:res.data.data}))
             .catch(_ => _)
         }
     

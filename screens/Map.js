@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, Button, TouchableHighlight } from 'react-native';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import axios from 'axios';
 
@@ -49,10 +49,10 @@ export default class Map extends React.Component {
 						{
 						this.state.places.map((e, i) => {
 							return e.is_closed ?
-								<View key={i}>
+								<View key = {i}>
 								</View>
 								:
-								<View key={i}>
+								<View key = {i}>
 									<Marker
 									coordinate = {{ 
 										latitude: e.coordinates.latitude,
@@ -60,15 +60,20 @@ export default class Map extends React.Component {
 									}}
 									>
 									<Callout
-										onPress={()=>{
+										onPress ={()=>{
               										this.props.navigation.navigate('Details',{data: e})}
 										}
 									>
-										<View>
+										<View style = {{ width: 200 }}>
 											<Text>{e.name}</Text>
 											<Text>{e.location.address1}</Text>
 											<Text>{e.price}</Text>
-											<Image source = {{ uri: e.image_url }} style = {{ width: 150, height: 150 }} />
+											{
+												e.image_url === '' ?
+													<Image source = { require('./../assets/question.png') } style = {{ width: 150, height: 150 }} />
+												:
+													<Image source = {{ uri: e.image_url }} style = {{ width: 150, height: 150 }} />
+											}
 										</View>
 									</Callout>
 									</Marker>
@@ -89,7 +94,7 @@ export default class Map extends React.Component {
               									this.props.navigation.navigate('Details',{data: e})}
 									}
 								>
-									<View>
+									<View style = {{ width: 200 }}>
 										<Text>{e.name_}</Text>
 										<Text>Time: {new Date(e.starts).getHours()}:00 - {new Date(e.ends).getHours()}:00</Text>
 										<Text>{e.price}</Text>
@@ -99,6 +104,17 @@ export default class Map extends React.Component {
 								</Marker>})
 						}
 					</MapView>
+					<>
+						<TouchableHighlight onPress = { this.getUserLatLong }>
+							<Image source = {require('./../assets/load.png')} style = {{ width: 50, height: 50, position: 'absolute', bottom: 80, left: 12 }}/>
+						</TouchableHighlight>
+						<View style = {{ color: 'white', position: 'absolute', bottom: 0, width: '100%', color: 'white' }}>
+							<Button title = 'Random' onPress = {this.random} color = 'white'/>
+						</View>
+						<TouchableHighlight onPress = { this.createEvent }>
+							<Image source = {require('./../assets/plus.png')} style = {{ width: 50, height: 50, position: 'absolute', bottom: 80, right: 12 }}/>
+						</TouchableHighlight>
+					</>
 				</>
 			}
 		</>
@@ -149,6 +165,18 @@ export default class Map extends React.Component {
 				this.getEvents(latitude, longitude)
 			}
 		})
+	}
+
+	createEvent = () => {
+		console.log('§±')
+	}
+
+	random = () => {
+		const randNum = Math.floor(Math.random() * Math.floor(3))
+		let activityData = {}
+		!randNum ? activityData = this.state.events[Math.floor(Math.random() * Math.floor(this.state.events.length))]
+		: activityData = this.state.places[Math.floor(Math.random() * Math.floor(this.state.places.length))]
+		this.props.navigation.navigate('Details',{data: activityData})
 	}
 
 }
