@@ -16,8 +16,8 @@ export default class eventForm extends React.Component {
             evLogo: '',
             venueName: '',
             venueAddr: '',
-            capacity: '',
-            ageRestrict: '',
+            capacity: null,
+            ageRestrict: null,
             startDate: '',
             startTime: '',
             endDate: '',
@@ -66,16 +66,9 @@ export default class eventForm extends React.Component {
                 long, 
                 capacity
             }
-            console.log("event object is...", event);
 
             // Create user-event in db
-            const config = {
-                method: 'POST',
-                url: `http://horizons-api.herokuapp.com/events/`,
-                data: event,
-            }
-            
-            Axios(config)
+            Axios.post(`http://horizons-api.herokuapp.com/events/`, event, {headers: { 'Content-Type': 'application/json' }})
                 .then(res =>{
                     console.log('event successfully posted...yay!!! ', res.data)
                     return {success: true}

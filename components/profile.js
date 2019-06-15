@@ -68,6 +68,9 @@ export default class Profile extends Component{
                                         leftAvatar={{ source: { uri: l.logo } }}
                                         title={l.name_}
                                         subtitle={`${nicerDateTime} ★ ${venue}`}
+                                        onPress={()=>{
+                                            this.props.navigate('Details', {data: l})
+                                        }}
                                     />
                                 )
                             })
