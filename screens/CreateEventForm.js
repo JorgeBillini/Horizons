@@ -33,7 +33,7 @@ export default class eventForm extends React.Component {
             startDate, startTime, endDate, endTime, error
         } = this.state;
 
-        const user_id = parseInt(this.props.navigation.state.params.data.user_id);
+        const user_id = parseInt(this.props.navigation.state.params.data.id);
         const venue = {name: venueName, age_restriction: ageRestrict, address: venueAddr};
 
         // Conditionals to ensure grabbing right data
@@ -47,8 +47,8 @@ export default class eventForm extends React.Component {
             this.setState({error: 'All Date & Time fields must be filled out.'})
         } else {
             // figure out lat long based on address input...
-            const lat = null;
-            const long = null;
+            let lat = 40.743076;
+            let long = -73.941680;
 
             // Make event object for db
             const event = {
@@ -66,6 +66,7 @@ export default class eventForm extends React.Component {
                 long, 
                 capacity
             }
+            console.log("event object is...", event);
 
             // Create user-event in db
             const config = {
@@ -91,7 +92,7 @@ export default class eventForm extends React.Component {
 
     render(){
         const {error} = this.state;
-
+        
         return (
             <ScrollView>
                 <KeyboardAvoidingView behavior='padding' style={styles.container}>
