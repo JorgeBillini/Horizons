@@ -3,6 +3,7 @@ import {StyleSheet, View, Text, TextInput, TouchableOpacity, KeyboardAvoidingVie
 import {Icon} from 'native-base';
 import Axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import DatePicker from 'react-native-datepicker'
 
 export default class eventForm extends React.Component {
     constructor(props){
@@ -16,12 +17,10 @@ export default class eventForm extends React.Component {
             evLogo: '',
             venueName: '',
             venueAddr: '',
-            capacity: null,
+            capacity:'',
             ageRestrict: null,
-            startDate: '',
-            startTime: '',
-            endDate: '',
-            endTime: '',
+            starts: '',
+            ends: '',
 
             error: '',
         }
@@ -30,25 +29,25 @@ export default class eventForm extends React.Component {
     submitEvent = () =>{
         const {evName, evCategory, evDesc, evPrice, evUrl, evLogo, 
             venueName, venueAddr, capacity, ageRestrict, 
-            startDate, startTime, endDate, endTime, error
+            starts, ends, error
         } = this.state;
 
         const user_id = parseInt(this.props.navigation.state.params.data.id);
         const venue = {name: venueName, age_restriction: ageRestrict, address: venueAddr};
 
         // Conditionals to ensure grabbing right data
-        if (!evName || !evDesc || !evPrice){
-            this.setState({error: 'Event name, description, and price must be filled out.'})
-        } else if (!venueName || !venueAddr){
+        if (!evName || !evPrice){
+            this.setState({error: 'Event name and price must be filled out.'})
+        } else if (!venueAddr){
             this.setState({error: 'Venue name and address must be filled out.'})
-        } else if (!startDate || !startTime || !endDate || !endTime){
+        } else if (!starts || !ends){
             this.setState({error: 'Please enter a number for venue capacity.'})
         } else if (capacity && typeof parseInt(capacity) !== 'number'){
             this.setState({error: 'All Date & Time fields must be filled out.'})
         } else {
             // figure out lat long based on address input...
-            let lat = 40.743076;
-            let long = -73.941680;
+            let lat = 40.759750;
+            let long = -73.931938;
 
             // Make event object for db
             const event = {
@@ -57,8 +56,8 @@ export default class eventForm extends React.Component {
                 description_: evDesc, 
                 category: evCategory, 
                 url_: evUrl, 
-                starts: `${startDate} ${startTime}`, 
-                ends: `${endDate} ${endTime}`, 
+                starts: `${starts}:00`,
+                ends: `${ends}:00`, 
                 price: evPrice, 
                 logo: evLogo, 
                 venue: JSON.stringify(venue), 
@@ -90,15 +89,11 @@ export default class eventForm extends React.Component {
             <ScrollView>
                 <KeyboardAvoidingView behavior='padding' style={styles.container}>
                     {/* Greeting */}
-                    <View>
-                        <Text style={{textAlign:'center',fontSize:20,marginTop:20,fontWeight:'bold'}}>
-                            Hi, {this.props.navigation.state.params.data.username}!
-                        </Text>
-                    </View>
 
                     {/* Form Title */}
                     <View>
-                        <Text style={styles.title}>
+                        <Text onPress={()=>{this.setState({evName: 'Pursuit Demo Day', evPrice: 'Free', venueAddr: '36-01 35th Ave, Astoria, NY 11106',
+			venueName:'Museum of Moving Images', capacity: 24})}} style={styles.title}>
                             Enter your event info below
                         </Text>
                     </View>
@@ -107,27 +102,11 @@ export default class eventForm extends React.Component {
                     <View style={styles.formContainer}>
                         <TextInput placeholder='Event name' 
                             style={styles.input} 
-                            onChangeText={(text) => this.setState({evName: text})} />
-
-                        <TextInput placeholder='Event type or category' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({evCategory: text})}/>
-
-                        <TextInput placeholder='Event description' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({evDesc: text})}/>
+                            value={this.state.evName} />
 
                         <TextInput placeholder='Event price' 
                             style={styles.input} 
-                            onChangeText={(text) => this.setState({evPrice: text})}/>
-
-                        <TextInput placeholder='Event link or url' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({evUrl: text})}/>
-
-                        <TextInput placeholder='Event logo' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({evLogo: text})}/>
+                            value={this.state.evPrice}/>
                     </View>
                     
                     {/* Form Title */}
@@ -139,21 +118,17 @@ export default class eventForm extends React.Component {
 
                     {/* Input Form */}
                     <View style={styles.formContainer}>
-                        <TextInput placeholder='Venue name' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({venueName: text})}/>
-
                         <TextInput placeholder='Venue address' 
                             style={styles.input} 
-                            onChangeText={(text) => this.setState({venueAddr: text})}/>
+                            value={this.state.venueAddr}/>
+
+                        <TextInput placeholder='Venue name' 
+                            style={styles.input} 
+                            value={this.state.venueName}/>
 
                         <TextInput placeholder='Venue capacity: # of people that fit' 
                             style={styles.input} 
-                            onChangeText={(text) => this.setState({capacity: text})}/>
-
-                        <TextInput placeholder='Age restriction' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({ageRestrict: text})}/>
+                            value={`${this.state.capacity}`}/>
                     </View>
 
                     {/* Form Title */}
@@ -165,21 +140,56 @@ export default class eventForm extends React.Component {
 
                     {/* Input Form */}
                     <View style={styles.formContainer}>
-                        <TextInput placeholder='Start date: YYYY-MM-DD' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({startDate: text})}/>
+		      <DatePicker
+			style={{width: 200}}
+			date={this.state.starts}
+			mode="datetime"
+			placeholder="starts"
+			format="YYYY-MM-DD HH:mm"
+			minDate="2019-06-01"
+			maxDate="2030-12-31"
+			confirmBtnText="Confirm"
+			cancelBtnText="Cancel"
+			customStyles={{
+			  dateIcon: {
+			    position: 'absolute',
+			    left: 0,
+			    top: 4,
+			    marginLeft: 0,
+			    marginBottom: 3
+			  },
+			  dateInput: {
+			    marginLeft: 36
+			  }
+			  // ... You can check the source to find the other keys.
+			}}
+			onDateChange={(date) => {this.setState({starts: date})}}
+		      />
 
-                        <TextInput placeholder='Start time' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({startTime: text})}/>
-
-                        <TextInput placeholder='End date: YYYY-MM-DD' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({endDate: text})}/>
-
-                        <TextInput placeholder='End time' 
-                            style={styles.input} 
-                            onChangeText={(text) => this.setState({endTime: text})}/>
+		      <DatePicker
+			style={{width: 200}}
+			date={this.state.ends}
+			mode="datetime"
+			placeholder="ends"
+			format="YYYY-MM-DD HH:mm"
+			minDate="2019-06-19"
+			maxDate="2019-12-31"
+			confirmBtnText="Confirm"
+			cancelBtnText="Cancel"
+			customStyles={{
+			  dateIcon: {
+			    position: 'absolute',
+			    left: 0,
+			    top: 4,
+			    marginLeft: 0
+			  },
+			  dateInput: {
+			    marginLeft: 36
+			  }
+			  // ... You can check the source to find the other keys.
+			}}
+			onDateChange={(date) => {this.setState({ends: date})}}
+		      />
                     </View>
 
                     {/* Submission error */}
