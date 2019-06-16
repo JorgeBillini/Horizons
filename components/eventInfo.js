@@ -8,9 +8,32 @@ import getDirections from 'react-native-google-maps-directions';
 import {Dimensions} from 'react-native';
 
 export default props =>{
+    console.log(props);
     const height = Dimensions.get('window').height;
     const width = Dimensions.get('window').width;
     const image_url = props.data.image_url || props.data.logo || ""
+    const Ratings  = () => {
+        return(
+            <>
+             <View style={{padding:10,flex:1}}>
+            {
+                props.data.rating ? <StarRating disabled={true} maxStars={5} halfStarEnabled={true} rating={props.data.rating} fullStarColor="black" /> : <Text style={{color:'white'}}>{props.data.description}</Text>
+
+            }
+            </View>
+            </>
+        )
+    }
+    let lat;
+    let long;
+    if(props.data.coordinates){
+        lat = props.data.coordinates.latitude;
+        long = props.data.coordinates.longitude;
+    }
+    else{
+        lat = parseFloat(props.data.lat);
+        long = parseFloat(props.data.long);
+    }
     return(
     <>
         <View style={{backgroundColor:'white',height:height,flex:1}}>
@@ -36,28 +59,21 @@ export default props =>{
             </View>
             <View>
                 <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>{props.data.price}</Text>
-                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
-
+                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:1}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
             </View>
-            <View style={{padding:10,flex:1}}>
-            {
-                props.data.rating ? <StarRating disabled={true} maxStars={5} halfStarEnabled={true} rating={props.data.rating} fullStarColor="black" /> : <Text style={{color:'white'}}>{props.data.description}</Text>
-
-            }
-
-                {/* <Text >
-                  {props.data.location.display_address[0]}
-                </Text>
-                <Text >
-                  {props.data.location.display_address[1]}
-                </Text> */}
-            </View>
+           
+            <Text style={{padding:8}}>
+                {props.data.description_}
+            </Text>
+            <View style={{padding:20}}>
+            {props.data.rating ? <Ratings /> : null}
             <Button 
-            dark block onPress={()=>{
+            dark block 
+            onPress={()=>{
                 const data = {
                     destination:{
-                        latitude: props.data.coordinates ? props.data.coordinates.latitude : props.data.lat,
-                        longitude: props.data.coordinates ? props.data.coordinates.longitude : props.data.long
+                        latitude: lat,
+                        longitude: long
                     },
                     params:[{
                         key:'travelmode',
@@ -70,6 +86,9 @@ export default props =>{
                     ]
                 }
                 getDirections(data)}}><Text style={{color:'white'}}>Go Here</Text></Button>
+
+            </View>
+         
            
                 </ScrollView>
 
