@@ -15,8 +15,9 @@ export default class Profile extends Component{
 
     componentDidMount(){
         const {user} = this.props;
+        console.log('profile component user...', user)
 
-        const p1 = Axios.get(`http://horizons-api.herokuapp.com/events/${user.id}`);
+        const p1 = Axios.get(`http://horizons-api.herokuapp.com/events/user/${user.id}`);
         const p2 = Axios.get(`http://horizons-api.herokuapp.com/events/past/${user.id}`);
 
         Promise.all([p1, p2])
@@ -59,6 +60,7 @@ export default class Profile extends Component{
     render (){
         const {user, currEvents, pastEvents} = this.state;
         const profilePic = user.pic ? user.pic : genericUserPic;
+
 
         return (
             <ScrollView>
@@ -169,12 +171,11 @@ const styles = StyleSheet.create({
         height: 125,
         alignSelf: 'center',
         borderWidth: 1,
-        borderRadius: 100,
+        borderRadius: 125/2,
         borderColor: 'white',
     },
     username: {
         marginTop: 10,
-        color: 'black',
         textAlign: 'center'
     },
     email: {

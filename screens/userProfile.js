@@ -53,6 +53,7 @@ export default class UserProfile extends React.Component{
         const {navigate} = this.props.navigation;
         const isSubmitted = this.props.navigation.getParam('submitted');
 
+        console.log(isLoggedIn);
         if (isLoggedIn){
             return (
                 <AuthContext.Provider value={isLoggedIn}>
