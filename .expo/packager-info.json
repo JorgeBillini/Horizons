@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 24880,
   "expoServerNgrokUrl": "https://gz-8jw.anonymous.horizons-frontend.exp.direct",
   "packagerNgrokUrl": "https://packager.gz-8jw.anonymous.horizons-frontend.exp.direct",
-  "ngrokPid": 21090
+  "ngrokPid": 24897
 }
