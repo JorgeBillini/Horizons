@@ -38,8 +38,8 @@ export default props =>{
     <>
         <View style={{backgroundColor:'white',height:height,flex:1}}>
         <Header
-            centerComponent={{ text: "", style:{color:'black' ,fontSize:25} }}
-            backgroundColor={'white'}
+            centerComponent={{ text: "Details", style:{color:'white' ,fontSize:25,fontWeight:'700'} }}
+            backgroundColor={'black'}
             />
             <View style={{backgroundColor:'white'}}>
             <View style={{justifyContent:'center',alignItems:'center'}}>
