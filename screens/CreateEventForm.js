@@ -181,8 +181,8 @@ export default class eventForm extends React.Component {
 			mode="datetime"
 			placeholder="ends"
 			format="YYYY-MM-DD HH:mm"
-			minDate="2019-06-19"
-			maxDate="2019-12-31"
+			minDate="2019-06-01"
+			maxDate="2030-12-31"
 			confirmBtnText="Confirm"
 			cancelBtnText="Cancel"
 			customStyles={{
