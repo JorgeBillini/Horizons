@@ -70,7 +70,7 @@ export default props =>{
                         <Text style={{textAlign:'left',fontSize:25,color:'black',padding:10}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
                     </View>
                 
-                    <Text style={{padding:8}}>
+                    <Text style={{padding:1}}>
                         {props.data.description_}
                     </Text>
 
