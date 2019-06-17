@@ -34,62 +34,71 @@ export default props =>{
         lat = parseFloat(props.data.lat);
         long = parseFloat(props.data.long);
     }
+    const pageTitle = props.data.rating ? 'Location Detail' : 'Event Detail';
+
     return(
-    <>
+    <ScrollView>
         <View style={{backgroundColor:'white',height:height,flex:1}}>
-        <Header
-            centerComponent={{ text: "Details", style:{color:'white' ,fontSize:25,fontWeight:'700'} }}
-            backgroundColor={'black'}
+            <Header
+                centerComponent={{ text: pageTitle, style:{color:'white' ,fontSize:25,fontWeight:'700'} }}
+                backgroundColor={'black'}
+                containerStyle={{
+                    borderBottomWidth: 0,
+                }}
             />
+
             <View style={{backgroundColor:'white'}}>
-            <View style={{justifyContent:'center',alignItems:'center'}}>
-		{
-		image_url === '' ?
-          <Image source={require('./../assets/question.png')}
-            style={{width:width, height:height/3}} />
-		:
-          <Image source={{uri: image_url}}
-            style={{width:width, height:height/3}} />
-		}
-            </View>
-            <Divider style={{backgroundColor:'black'}}/>
-            <ScrollView>
-            <View>
-                <Text style={{textAlign:'left',fontSize:30,color:'black', padding:8}}>{props.data.name || props.data.name_}</Text>
-            </View>
-            <View>
-                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:8}}>{props.data.price}</Text>
-                <Text style={{textAlign:'left',fontSize:25,color:'black',padding:1}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
-            </View>
-           
-            <Text style={{padding:8}}>
-                {props.data.description_}
-            </Text>
-            <View style={{padding:20}}>
-            {props.data.rating ? <Ratings /> : null}
-            <Button 
-            dark block 
-            onPress={()=>{
-                const data = {
-                    destination:{
-                        latitude: lat,
-                        longitude: long
-                    },
-                    params:[{
-                        key:'travelmode',
-                        value:'walking'
-
-                    },{
-                        key:'dir_action',
-                        value:'navigate'
+                <View style={{justifyContent:'center',alignItems:'center'}}>
+                    {
+                    image_url === '' ?
+                    <Image source={require('./../assets/question.png')}
+                        style={{width:width, height:height/3}} />
+                    :
+                    <Image source={{uri: image_url}}
+                        style={{width:width, height:height/3}} />
                     }
-                    ]
-                }
-                getDirections(data)}}><Text style={{color:'white'}}>Go Here</Text></Button>
+                </View>
 
-            </View>
-         
-           
+                <Divider style={{backgroundColor:'black'}}/>
+
+                <ScrollView>
+                    <View>
+                        <Text style={{textAlign:'left',fontSize:30,color:'black', padding:10}}>{props.data.name || props.data.name_}</Text>
+                    </View>
+                    <View>
+                        <Text style={{textAlign:'left',fontSize:25,color:'black',padding:10}}>{props.data.price}</Text>
+                        <Text style={{textAlign:'left',fontSize:25,color:'black',padding:10}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
+                    </View>
+                
+                    <Text style={{padding:8}}>
+                        {props.data.description_}
+                    </Text>
+
+                    <View style={{padding:20}}>
+                    {props.data.rating ? <Ratings /> : null}
+                    <Button style={{bottomMargin: 20}}
+                    dark block 
+                    onPress={()=>{
+                        const data = {
+                            destination:{
+                                latitude: lat,
+                                longitude: long
+                            },
+                            params:[{
+                                key:'travelmode',
+                                value:'walking'
+
+                            },{
+                                key:'dir_action',
+                                value:'navigate'
+                            }
+                            ]
+                        }
+                        getDirections(data)}}><Text style={{color:'white'}}>Go Here</Text></Button>
+
+                    </View>
+                
+            
                 </ScrollView>
 
             </View>
@@ -97,7 +106,7 @@ export default props =>{
         </View>
             
           
-    </>)
+    </ScrollView>)
         
             
 }
