@@ -46,8 +46,8 @@ export default class eventForm extends React.Component {
             this.setState({error: 'All Date & Time fields must be filled out.'})
         } else {
             // figure out lat long based on address input...
-            let lat = 40.759750;
-            let long = -73.931938;
+            let lat = 40.7563454;
+            let long = -73.9244968;
 
             // Make event object for db
             const event = {
@@ -92,8 +92,17 @@ export default class eventForm extends React.Component {
 
                     {/* Form Title */}
                     <View>
-                        <Text onPress={()=>{this.setState({evName: 'Pursuit Demo Day', evPrice: 'Free', venueAddr: '36-01 35th Ave, Astoria, NY 11106',
-			venueName:'Museum of Moving Images', capacity: 24})}} style={styles.title}>
+                        <Text onPress={()=>{this.setState({
+                            evName: 'Pursuit Demo Day', 
+                            evPrice: 'Free',
+                            evLogo: 'https://www.arborbrothers.org/wp-content/uploads/2018/10/Pursuit-Logo.jpg',
+                            evUrl: 'https://pursuit52webdemoday.splashthat.com/',
+                            evDesc: 'We are pleased to invite you to experience the products built by our Pursuit Full Stack Web developers! Join us on June 19, 2019 as our developers showcase their apps. They will be exhibiting their hard work, passion, and creativity that brought them to this moment. Come celebrate their achievements!',
+                            venueAddr: '36-01 35th Ave, Astoria, NY 11106',
+                            venueName:'Museum of Moving Images', 
+                            capacity: 24
+                            })}} 
+                            style={styles.title}>
                             Enter your event info below
                         </Text>
                     </View>
