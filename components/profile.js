@@ -60,7 +60,7 @@ export default class Profile extends Component{
     render (){
         const {user, currEvents, pastEvents} = this.state;
         const profilePic = user.pic ? user.pic : genericUserPic;
-
+        console.log(profilePic);
 
         return (
             <ScrollView>
@@ -68,7 +68,7 @@ export default class Profile extends Component{
                 
                 {/* Profile Section */}
                 <View style={styles.profileContainer}>
-                    <Image source={profilePic} style={styles.profileImg}/>
+                    <Image source={{uri: `${profilePic}`}} style={styles.profileImg}/>
                     <Text h3 style={styles.username}> {user.username} </Text>
                     <Text style={styles.email}> {user.email} </Text>
                 </View>
