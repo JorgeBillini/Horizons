@@ -41,10 +41,13 @@ export default class Profile extends Component{
     }
     componentDidUpdate(){
         const data= this.props.isSubmitted;
+        
         if (data && this.state.isUpdated === false){
             const {user} = this.props;
 
-            const p1 = Axios.get(`http://horizons-api.herokuapp.com/events/${user.id}`);
+            console.log(data, this.state.isUpdated);
+
+            const p1 = Axios.get(`http://horizons-api.herokuapp.com/events/user/${user.id}`);
             const p2 = Axios.get(`http://horizons-api.herokuapp.com/events/past/${user.id}`);
     
             Promise.all([p1, p2])
@@ -61,14 +64,13 @@ export default class Profile extends Component{
         const {user, currEvents, pastEvents} = this.state;
         const profilePic = user.pic ? user.pic : genericUserPic;
 
-
         return (
             <ScrollView>
             <KeyboardAvoidingView style={styles.container}>
                 
                 {/* Profile Section */}
                 <View style={styles.profileContainer}>
-                    <Image source={profilePic} style={styles.profileImg}/>
+                    <Image source={{uri: `${profilePic}`}} style={styles.profileImg}/>
                     <Text h3 style={styles.username}> {user.username} </Text>
                     <Text style={styles.email}> {user.email} </Text>
                 </View>
