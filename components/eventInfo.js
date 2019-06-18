@@ -61,20 +61,20 @@ export default props =>{
 
                 <Divider style={{backgroundColor:'black'}}/>
 
-                <ScrollView>
+                <ScrollView >
                     <View>
-                        <Text style={{textAlign:'left',fontSize:30,color:'black', padding:10}}>{props.data.name || props.data.name_}</Text>
+                        <Text style={{textAlign:'left',fontSize:30,color:'black', paddingRight:10,paddingLeft:10}}>{props.data.name || props.data.name_}</Text>
                     </View>
                     <View>
-                        <Text style={{textAlign:'left',fontSize:25,color:'black',padding:10}}>{props.data.price}</Text>
-                        <Text style={{textAlign:'left',fontSize:25,color:'black',padding:10}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
+                        <Text style={{textAlign:'left',fontSize:25,color:'black',paddingRight:10,paddingLeft:10,marginTop:5}}>{props.data.price}</Text>
+                        <Text style={{textAlign:'left',fontSize:25,color:'black',paddingRight:10,paddingLeft:10}}>{props.data.categories ? props.data.categories[0].title :"" }</Text>
                     </View>
-                
-                    <Text style={{padding:1}}>
+                {   props.data.description_ ? 
+                    <Text style={{height:height/8,paddingRight:15,paddingLeft:15}}>
                         {props.data.description_}
-                    </Text>
+                    </Text> : null}
 
-                    <View style={{padding:20}}>
+                    <View style={{paddingRight:20,paddingLeft:20}}>
                     {props.data.rating ? <Ratings /> : null}
                     <Button style={{bottomMargin: 20}}
                     dark block 

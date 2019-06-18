@@ -105,12 +105,10 @@ export default class Map extends React.Component {
 						}
 					</MapView>
 					<>
-						<TouchableHighlight onPress = { this.getUserLatLong }>
-							<Image source = {require('./../assets/load.png')} style = {{ width: 50, height: 50, position: 'absolute', bottom: 80, left: 12 }}/>
+						<TouchableHighlight onPress = { this.random}>
+							<Image source = {require('./../assets/load.png')} style = {{ width: 50, height: 50, position: 'absolute', bottom: 20, left: 12 }}/>
 						</TouchableHighlight>
-						<View style = {{ color: 'white', position: 'absolute', bottom: 0, width: '100%', color: 'white' }}>
-							<Button title = 'Random' onPress = {this.random} color = 'white'/>
-						</View>
+						
 					</>
 				</>
 			}
