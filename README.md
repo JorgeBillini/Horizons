@@ -1,5 +1,7 @@
 # Horizons_FrontEnd
 Horizons, a mobile app built with React-native is here! use our app to explore your local neighborhoods and events!
+
+
 Link to backend repo: https://github.com/JorgeBillini/Horizons_Backend
 # Get Started
 In order to start this project, you might need the following dependencies, so make sure you have these installed before running!
