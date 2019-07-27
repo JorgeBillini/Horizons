@@ -1,4 +1,7 @@
-# Horizons_FrontEnd
+
+
+[Welcome](https://imgur.com/jSgcP3V)
+# Horizons
 Horizons, a mobile app built with React-native is here! use our app to explore your local neighborhoods and events!
 
 
@@ -17,6 +20,14 @@ https://expo.io/@jorgebillini/Horizons_FrontEnd
 
 ## App stores coming soon!
 We are working very hard to publish this app on the app stores, in the mean time you can go to the expo link with your android phone and start exploring! Additionally, you can fork this repo and start contributing.
+## Screenshots
+[Map view](https://imgur.com/gPBZOpi)
+[List view](https://imgur.com/6S6IpDK)
+[Location Details](https://imgur.com/v9hoW1R)
+[Profile](https://imgur.com/4iUuxQA)
+[Upload your event](https://imgur.com/6EtT2pp)
+[Event/Location Preview](https://imgur.com/uDO8dyT)
+
 
 ## Contributors:
 1. Jorge Billini @jorgebillini
