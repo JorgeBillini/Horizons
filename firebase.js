@@ -4,7 +4,7 @@ import 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDxPnjMYH9QDVm9qVo04SoxzAtdFzggTAQ",
+    apiKey: "PROCESS.ENV.firebase_key",
     authDomain: "horizons-12345.firebaseapp.com",
     databaseURL: "https://horizons-12345.firebaseio.com",
     projectId: "horizons-12345",
