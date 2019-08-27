@@ -20,7 +20,7 @@
     "react-native-navigation": "^2.18.5",
     "react-native-star-rating": "^1.1.0",
     "react-native-viewport-units": "0.0.5",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.12.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.2.0"
