@@ -5505,10 +5505,10 @@ react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
-react-native-navigation@^2.18.5:
-  version "2.21.0"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.21.0.tgz#e35aa0934852d3423527da0452c2080566ff4666"
-  integrity sha512-6dmwx89OuQrjDXbc4RBT5iHkO50pWBdecFPozmMxWE+RrurjCtkKhEHBuYDPL9bEwrnmpnoAiIp/FaTqrq3p4Q==
+react-native-navigation@^2.27.6:
+  version "2.27.6"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.27.6.tgz#ecdd4c348cfe8a9810d552c81abc416ab00dd303"
+  integrity sha512-BDSQjmv7+Fkk2xGUlu3xFG7336ScTvLlz4q6tFu0Dr3AJLflUP7KNOCuDzqhTScTe3umXp3qqJoEqWDnt/i0AA==
   dependencies:
     hoist-non-react-statics "3.x.x"
     lodash "4.17.x"
