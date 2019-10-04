@@ -2213,11 +2213,6 @@ cliui@^3.0.3, cliui@^3.2.0:
     strip-ansi "^3.0.1"
     wrap-ansi "^2.0.0"
 
-cocoa-lumberjack@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/cocoa-lumberjack/-/cocoa-lumberjack-3.0.5.tgz#0b29683272ad426974a2c71c86d4de9a81029e6d"
-  integrity sha512-zwzRb4hhObx8nLBo8QcE1TvJfHdE1vdQRxYT6Zyh8yLB8yYz4u/FCkHeVNhUNVxyXopkWL53m2rEwpvjm9q+Yw==
-
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -5455,24 +5450,23 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-background-fetch@~2.5.4:
-  version "2.5.6"
-  resolved "https://registry.yarnpkg.com/react-native-background-fetch/-/react-native-background-fetch-2.5.6.tgz#dde90cc411919b94678ad96febeda433cae27528"
-  integrity sha512-/k62G/Wbu0gWymJLIvp/pWIy1hbU7VTUKXqmnIpgXhdoZ9gOiVgDBZtBobtyLRZZo2tinE6V8ImePmW4owaKfA==
+react-native-background-fetch@~2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-background-fetch/-/react-native-background-fetch-2.7.0.tgz#33748dea9c0c4e1a387fb2d2ac7b48e8f4596ece"
+  integrity sha512-FZIMIsqwng21wQ91ve+iJEMADb6PEnzcmjJyo1DyIot+WhNShyFDE2Tmzg7/coZm28d7YIixCb9vbd0K/wPbNQ==
   dependencies:
     fast-plist "^0.1.2"
     plist "^3.0.1"
     xcode "^2.0.0"
 
-react-native-background-geolocation@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-background-geolocation/-/react-native-background-geolocation-3.0.5.tgz#42e12fb2b638150cd1b8b4dbc991a4a2e75196cc"
-  integrity sha512-YQ0q878MnYDft3SmwBzWzB19cRWXTCUadtdrBrmeYC9QT6kAsyeyMU0boNKTJFzClFso6pL9QzxVKg3MZyvM1Q==
+react-native-background-geolocation@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-background-geolocation/-/react-native-background-geolocation-3.2.2.tgz#5fd2abc9ef3ac21afde795f60772e80c948f3bde"
+  integrity sha512-KLzIjTgXXNX7/MRcoGRmQJYOBXiRQO+o+f4t2nIxrKsYW/uR/igoLUfjgVXqH5N83gGLERsDsIgJUAKWPjaN8A==
   dependencies:
-    cocoa-lumberjack "^3.0.5"
     fast-plist "^0.1.2"
     plist "^2.0.1"
-    react-native-background-fetch "~2.5.4"
+    react-native-background-fetch "~2.7.0"
     xcode "^0.9.1"
 
 react-native-branch@2.2.5:
