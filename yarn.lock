@@ -5542,10 +5542,10 @@ react-native-gesture-handler@~1.0.14:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-google-maps-directions@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-google-maps-directions/-/react-native-google-maps-directions-2.1.0.tgz#b7b1088551f8952a8a6cc5e6d65a19702889a35b"
-  integrity sha512-qAUqI3eb+5yMXq107g05NBzBAhXufe+kdHhMso1EJrMrH7QS8pFFGI177en2xdBDOjMzdw4Yxemzfaiwb+9I3w==
+react-native-google-maps-directions@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-google-maps-directions/-/react-native-google-maps-directions-2.1.1.tgz#d27c38508174bd4009adebc1517eff852901c13b"
+  integrity sha512-hsq2T3cJsZZ31akEq08nBCdRlYQ+o+07R7wTb9QclrTQHJRIKR78mI9lgizOpKm4NFSYUOxGtbL7LfhJw1OANQ==
 
 react-native-iphone-x-helper@^1.0.3:
   version "1.2.1"
