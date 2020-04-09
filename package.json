@@ -13,7 +13,7 @@
     "native-base": "^2.13.8",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-background-geolocation": "^3.3.2",
+    "react-native-background-geolocation": "^3.6.2",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^1.2.7",
     "react-native-google-maps-directions": "^2.1.1",
