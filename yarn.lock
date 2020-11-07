@@ -5461,23 +5461,23 @@ react-native-animatable@^1.2.4:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-background-fetch@~2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/react-native-background-fetch/-/react-native-background-fetch-2.7.1.tgz#1467aed0fd2851edfdf10d3d9ac4ffd0cf069a85"
-  integrity sha512-BNWBVL3kewDJL+B+0gF84iF8viws3AGHwxsWPp+MhWvgb/Su6BPWjgi8u0A9fRYhacozmAcNEPT7E3tah1P8lg==
+react-native-background-fetch@~3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-background-fetch/-/react-native-background-fetch-3.1.0.tgz#5ec182662e76bd8257f21c6f65cdcb73e87a0708"
+  integrity sha512-dnrfX3Od4r3aKuRSwDkpaPFXc3dYD5DbIW7CWC41M1CdEZEXNIWfZRvJPMVa72iflOzAh68ZTfZ3PgBK/NDtsQ==
   dependencies:
     fast-plist "^0.1.2"
     plist "^3.0.1"
     xcode "^2.0.0"
 
-react-native-background-geolocation@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-background-geolocation/-/react-native-background-geolocation-3.3.2.tgz#fe4407842920ee5f7b81986f6e3d0d52c054ef88"
-  integrity sha512-stXgpSZ54fISKyaPOOytJhjFUQ0BdbuxaoqGTkJDf9+QGQryU9U9DD2Cq4z8n7qOoEfR5e7bCg/omoPOvOPmLw==
+react-native-background-geolocation@^3.9.3:
+  version "3.9.3"
+  resolved "https://registry.yarnpkg.com/react-native-background-geolocation/-/react-native-background-geolocation-3.9.3.tgz#7bab17653c852e3b54fa2765a85f1ae3d6bf548a"
+  integrity sha512-XfONtcTL7W2qsZxHzqQomIcza3IrjqvEujeqViHuGRc+sQjeQAm8rqTzbuBNx/QNuLIuerdBy3lzwd89myz7Cw==
   dependencies:
     fast-plist "^0.1.2"
     plist "^2.0.1"
-    react-native-background-fetch "~2.7.1"
+    react-native-background-fetch "~3.1.0"
     xcode "^0.9.1"
 
 react-native-branch@2.2.5:
